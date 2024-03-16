@@ -12,7 +12,7 @@ C:\Users\THM-4n6\Desktop\EZtools\MFTECmd.exe `
  --csv C:\Users\THM-4n6\Desktop
 ```
 
-## Task 5 Evidence of Execution
+## Task 5 Evidence of Execution
 
 How many times was gkape.exe executed?
 What is the last execution time of gkape.exe
