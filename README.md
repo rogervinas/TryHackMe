@@ -1,6 +1,6 @@
 # [TryHackMe](https://tryhackme.com)
 
-<img src="https://tryhackme-badges.s3.amazonaws.com/roger.vinas.png" alt="TryHackMe">
+[![My Profile](https://tryhackme-badges.s3.amazonaws.com/roger.vinas.png)]([link_url](https://tryhackme.com/p/roger.vinas))
 
 - [Cyber Defense](https://tryhackme.com/r/paths)
   - Threat Emulation
