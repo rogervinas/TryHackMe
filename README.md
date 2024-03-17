@@ -1,6 +1,6 @@
 # [TryHackMe](https://tryhackme.com)
 
-[My profile @ TryHackMe](https://tryhackme.com/p/roger.vinas)
+[My profile](https://tryhackme.com/p/roger.vinas)
 
 - [Cyber Defense](https://tryhackme.com/r/paths)
   - Threat Emulation
