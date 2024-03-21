@@ -17,3 +17,4 @@
   - [Zeek](rooms/zeekbro.md)
   - [Zeek Exercises](rooms/zeekbroexercises.md)
   - [Brim](rooms/brim.md)
+  - [Linux Forensics](rooms/linuxforensics.md)
