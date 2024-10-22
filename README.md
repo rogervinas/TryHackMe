@@ -18,3 +18,4 @@
   - [Zeek Exercises](rooms/zeekbroexercises.md)
   - [Brim](rooms/brim.md)
   - [Linux Forensics](rooms/linuxforensics.md)
+  - [TShark Challenge II: Directory](rooms/tsharkchallengestwo.md)
