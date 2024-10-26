@@ -21,3 +21,4 @@
   - [TShark Challenge I: Teamwork](rooms/tsharkchallengesone.md)
   - [TShark Challenge II: Directory](rooms/tsharkchallengestwo.md)
   - [Retracted](rooms/retracted.md)
+  - [Disgruntled](rooms/disgruntled.md)
