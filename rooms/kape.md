@@ -2,7 +2,7 @@
 
 ## Task 7 Hands-on Challenge
 
-Use PowerShell > Run As Administrator and run:
+Use PowerShell > Run As Administrator and execute:
 
 ```powershell
 cd C:\Users\THM-4n6\Desktop\KAPE
