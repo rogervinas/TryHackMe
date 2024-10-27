@@ -1,8 +1,8 @@
 # [KAPE](https://tryhackme.com/r/room/kape)
 
-Use PowerShell > Run As Administrator
-
 ## Task 7 Hands-on Challenge
+
+Use PowerShell > Run As Administrator and run:
 
 ```powershell
 cd C:\Users\THM-4n6\Desktop\KAPE
