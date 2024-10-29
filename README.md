@@ -23,3 +23,4 @@
   - [Retracted](rooms/retracted.md)
   - [Disgruntled](rooms/disgruntled.md)
   - [KAPE](rooms/kape.md)
+  - [Secret Recipe](rooms/registry4n6.md)
