@@ -25,3 +25,4 @@
   - [KAPE](rooms/kape.md)
   - [Secret Recipe](rooms/registry4n6.md)
   - [Tempest](rooms/tempestincident.md)
+  - [Boogeyman 1](rooms/boogeyman1.md)
