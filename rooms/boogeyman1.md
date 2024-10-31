@@ -88,7 +88,7 @@ cat powershell.json | jq -s -c 'sort_by(.Timestamp) | .[] | .ScriptBlockText' | 
 cat powershell.json | jq -s -c 'sort_by(.Timestamp) | .[] | .ScriptBlockText' | grep '$hex'
 ```
 
-## Task 4 [Network Traffic Analysis] They got us. Call the bank immediately!
+## Task 4 [Network Traffic Analysis] They got us. Call the bank immediately!
 
 **What software is used by the attacker to host its presumed file/payload server?**
 
