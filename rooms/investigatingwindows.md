@@ -2,14 +2,14 @@
 
 ## Task 1 Investigating Windows
 
-Whats the version and year of the windows machine?
+**Whats the version and year of the windows machine?**
 
 ```powershell
 # Manually using "System Information" (msinfo32)
 Get-CimInstance Win32_OperatingSystem | Select-Object -Property Caption
 ```
 
-Which user logged in last?
+**Which user logged in last?**
 
 ```powershell
 # Manually via "Event Viewer" (eventvwr.msc) check Windows Logs > Security
@@ -21,7 +21,7 @@ foreach ($event in $logonEvents) {
 }
 ```
 
-When did John log onto the system last?
+**When did John log onto the system last?**
 
 ```powershell
 # Manually via "Event Viewer" (eventvwr.msc) check Windows Logs > Security
@@ -31,11 +31,11 @@ Get-WinEvent `
   Format-List *
 ```
 
-What IP does the system connect to when it first starts?
+**What IP does the system connect to when it first starts?**
 
-- Just restart the machine a cmd window will be executed
+* Just restart the machine a cmd window will be executed
 
-What two accounts had administrative privileges (other than the Administrator user)?
+**What two accounts had administrative privileges (other than the Administrator user)?**
 
 ```powershell
 # Manually via "Local Users and Groups" (lusrmgr.msc) check users member of "Administrators" group
@@ -45,17 +45,17 @@ Get-WmiObject win32_groupuser | `
   Format-List Name
 ```
 
-What is the name of the scheduled task that is malicious?
-What file was the task trying to run daily?
-What port did this file listen locally for?
-What tool was used to get Windows passwords?
+**What is the name of the scheduled task that is malicious?**
+**What file was the task trying to run daily?**
+**What port did this file listen locally for?**
+**What tool was used to get Windows passwords?**
 
 ```shell
 # Manually via "Task Scheduler" (taskschd.msc)
 Get-ScheduledTask | Select-Object -Property TaskName -ExpandProperty Actions | Format-List *
 ```
 
-When did Jenny last logon?
+**When did Jenny last logon?**
 
 ```powershell
 Get-WinEvent `
@@ -64,27 +64,27 @@ Get-WinEvent `
   Format-List *
 ```
 
-At what date did the compromise take place?
-During the compromise, at what time did Windows first assign special privileges to a new logon?
+**At what date did the compromise take place?**
+**During the compromise, at what time did Windows first assign special privileges to a new logon?**
 
 ```powershell
 Get-WinEvent -FilterXPath "*[System[EventID=4672]]" -LogName Security | Format-List *
 ```
 
-What was the attackers external control and command servers IP?
-Check for DNS poisoning, what site was targeted?
+**What was the attackers external control and command servers IP?**
+**Check for DNS poisoning, what site was targeted?**
 
 ```powershell
 cat C:\Windows\System32\drivers\etc\hosts
 ```
 
-What was the extension name of the shell uploaded via the servers website?
+**What was the extension name of the shell uploaded via the servers website?**
 
 ```powershell
 ls C:\inetpub\wwwroot\
 ```
 
-What was the last port the attacker opened?
+**What was the last port the attacker opened?**
 
 ```shell
 $events = Get-WinEvent -LogName "Microsoft-Windows-Windows Firewall With Advanced Security/Firewall"

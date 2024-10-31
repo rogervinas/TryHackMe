@@ -14,8 +14,8 @@ C:\Users\THM-4n6\Desktop\EZtools\MFTECmd.exe `
 
 ## Task 5 Evidence of Execution
 
-How many times was gkape.exe executed?
-What is the last execution time of gkape.exe
+**How many times was gkape.exe executed?**
+**What is the last execution time of gkape.exe**
 
 ```powershell
 C:\Users\THM-4n6\Desktop\EZtools\PECmd.exe `
@@ -25,7 +25,7 @@ C:\Users\THM-4n6\Desktop\EZtools\PECmd.exe `
 # Last run
 ```
 
-When Notepad.exe was opened on 11/30/2021 at 10:56, how long did it remain in focus?
+**When Notepad.exe was opened on 11/30/2021 at 10:56, how long did it remain in focus?**
 
 ```powershell
 C:\Users\THM-4n6\Desktop\EZtools\WxTCmd.exe `
@@ -34,7 +34,7 @@ C:\Users\THM-4n6\Desktop\EZtools\WxTCmd.exe `
 # Duration
 ```
 
-What program was used to open C:\Users\THM-4n6\Desktop\KAPE\KAPE\ChangeLog.txt?
+**What program was used to open C:\Users\THM-4n6\Desktop\KAPE\KAPE\ChangeLog.txt?**
 
 ```powershell
 C:\Users\THM-4n6\Desktop\EZtools\JLECmd.exe `
@@ -49,8 +49,8 @@ C:\Users\THM-4n6\Desktop\EZtools\JLECmd.exe `
 
 ## Task 6 File/folder knowledge
 
-When was the folder C:\Users\THM-4n6\Desktop\regripper last opened?
-When was the above-mentioned folder first opened?
+**When was the folder C:\Users\THM-4n6\Desktop\regripper last opened?**
+**When was the above-mentioned folder first opened?**
 
 ```powershell
 C:\Users\THM-4n6\Desktop\EZtools\JLECmd.exe `

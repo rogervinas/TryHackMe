@@ -2,19 +2,19 @@
 
 ## Task 3 Preparation - Tools and Artifacts
 
-What is the SHA256 hash of the capture.pcapng file?
+**What is the SHA256 hash of the capture.pcapng file?**
 
 ```powershell
 Get-FileHash -Algorithm SHA256 'C:\Users\user\Desktop\Incident Files\capture.pcapng'
 ```
 
-What is the SHA256 hash of the sysmon.evtx file?
+**What is the SHA256 hash of the sysmon.evtx file?**
 
 ```powershell
 Get-FileHash -Algorithm SHA256 'C:\Users\user\Desktop\Incident Files\sysmon.evtx'
 ```
 
-What is the SHA256 hash of the windows.evtx file?
+**What is the SHA256 hash of the windows.evtx file?**
 
 ```powershell
 Get-FileHash -Algorithm SHA256 'C:\Users\user\Desktop\Incident Files\windows.evtx'
@@ -33,9 +33,9 @@ C:\Tools\EvtxECmd\EvtxECmd.exe -f 'C:\Users\user\Desktop\Incident Files\sysmon.e
 --csv 'C:\Users\user\Desktop\Incident Files' --csvf sysmon.csv
 ```
 
-The user of this machine was compromised by a malicious document. What is the file name of the document?
-What is the name of the compromised user and machine?
-What is the PID of the Microsoft Word process that opened the malicious document?
+**The user of this machine was compromised by a malicious document. What is the file name of the document?**
+**What is the name of the compromised user and machine?**
+**What is the PID of the Microsoft Word process that opened the malicious document?**
 
 * Open Sysmon View
 * Load C:\Users\user\Desktop\Incident Files\sysmon.xml
@@ -45,7 +45,7 @@ What is the PID of the Microsoft Word process that opened the malicious document
 * Navigate the diagram and click on the "Process Create" box
 * All the answers are there
 
-Based on Sysmon logs, what is the IPv4 address resolved by the malicious domain used in the previous question?
+**Based on Sysmon logs, what is the IPv4 address resolved by the malicious domain used in the previous question?**
 
 * Open Sysmon View
 * Load C:\Users\user\Desktop\Incident Files\sysmon.xml
@@ -54,32 +54,32 @@ Based on Sysmon logs, what is the IPv4 address resolved by the malicious domain 
 * Click on Session = {4bbef3ae-aaa8-62b0-2e0a-000000000700}
 * Navigate the diagram and click on the "DNS Query" box for the malicious domain
 
-What is the base64 encoded string in the malicious payload executed by the document?
+**What is the base64 encoded string in the malicious payload executed by the document?**
 
 * Open Timeline Explorer
 * Load C:\Users\user\Desktop\Incident Files\sysmon.csv
 * Filter by "User Name" = TEMPEST\benimaru
 * Search on "Executable Info" until you see a value that looks like base64
 
-What is the CVE number of the exploit used by the attacker to achieve a remote code execution? 
+**What is the CVE number of the exploit used by the attacker to achieve a remote code execution?**
 
 * Search for "msdt vulnerability" in google
 
 ## Task 5 Initial Access - Stage 2 execution
 
-The malicious execution of the payload wrote a file on the system. What is the full target path of the payload?
+**The malicious execution of the payload wrote a file on the system. What is the full target path of the payload?**
 
 * Decode the base64 payload from last section
 * Get the full target path taking into account that `$app` = `C:\Users\benimaru\AppData\Roaming`
 
-What is the executed command upon a successful login of the compromised user?
+**What is the executed command upon a successful login of the compromised user?**
 
 * Open Timeline Explorer
 * Load C:\Users\user\Desktop\Incident Files\sysmon.csv
 * Filter by "User Name" = TEMPEST\benimaru
 * Search on "Executable Info" after the line with the base64 payload, first command that uses the malicious domain
 
-What is the SHA256 hash of the malicious binary downloaded for stage 2 execution?
+**What is the SHA256 hash of the malicious binary downloaded for stage 2 execution?**
 
 * Open Sysmon View
 * Load C:\Users\user\Desktop\Incident Files\sysmon.xml
@@ -89,7 +89,7 @@ What is the SHA256 hash of the malicious binary downloaded for stage 2 execution
 * Navigate the diagram and click on the "Process Create" box
 * SHA256 of first.exe is there
 
-What is the domain and port used by the attacker?
+**What is the domain and port used by the attacker?**
 
 * Open Sysmon View
 * Load C:\Users\user\Desktop\Incident Files\sysmon.xml
@@ -101,18 +101,18 @@ What is the domain and port used by the attacker?
 
 ## Task 6 Initial Access - Malicious Document Traffic
 
-What is the URL of the malicious payload embedded in the document?
+**What is the URL of the malicious payload embedded in the document?**
 
 * Open Brim
 * Load C:\Users\user\Desktop\Incident Files\capture.pcapng
 * Filter by `_path=="http" "xyz" method=="GET" | sort ts`
 * Check the first uri after the `.doc` one
 
-What is the encoding used by the attacker on the c2 connection?
-What is the parameter used by the binary?
-What is the URL used by the binary?
-What is the HTTP method used by the binary?
-Based on the user agent, what programming language was used by the attacker to compile the binary?
+**What is the encoding used by the attacker on the c2 connection?**
+**What is the parameter used by the binary?**
+**What is the URL used by the binary?**
+**What is the HTTP method used by the binary?**
+**Based on the user agent, what programming language was used by the attacker to compile the binary?**
 
 * Open Brim
 * Load C:\Users\user\Desktop\Incident Files\capture.pcapng
@@ -137,17 +137,17 @@ Get-Content -Path "C:\Users\user\Desktop\Incident Files\9ab62b5-80.csv" | ForEac
 } | Out-File -FilePath "C:\Users\user\Desktop\Incident Files\9ab62b5-80.log"
 ```
 
-What is the password discovered on the aforementioned file?
+**What is the password discovered on the aforementioned file?**
 
 * Search for `$pass` in C:\Users\user\Desktop\Incident Files\9ab62b5-80.log
 
-What is the listening port that could provide a remote shell inside the machine?
+**What is the listening port that could provide a remote shell inside the machine?**
 
 * Search for `Active Connections` in C:\Users\user\Desktop\Incident Files\9ab62b5-80.log
 * For all the `LISTENING` ports check which one is most commonly used for remote shell access
 
-What is the command executed by the attacker to establish the connection?
-What is the SHA256 hash of the binary used by the attacker to establish the reverse socks proxy connection?
+**What is the command executed by the attacker to establish the connection?**
+**What is the SHA256 hash of the binary used by the attacker to establish the reverse socks proxy connection?**
 
 * Last command in C:\Users\user\Desktop\Incident Files\9ab62b5-80.log downloads C:\Users\benimaru\Downloads\ch.exe
 * Open Sysmon View
@@ -158,17 +158,17 @@ What is the SHA256 hash of the binary used by the attacker to establish the reve
 * Navigate the diagram and click on the "Process Create" box
 * Full command and SHA256 of ch.exe is there
 
-What is the name of the tool used by the attacker based on the SHA256 hash?
+**What is the name of the tool used by the attacker based on the SHA256 hash?**
 
 * Search the hash in https://www.virustotal.com
 
-Based on the succeeding process after the execution of the socks proxy, what service did the attacker use to authenticate?
+**Based on the succeeding process after the execution of the socks proxy, what service did the attacker use to authenticate?**
 
 * Search which windows service uses the port answered in the previous question "What is the listening port that could provide a remote shell inside the machine?"
 
 ## Task 8 Privilege Escalation - Exploiting Privileges
 
-After discovering the privileges of the current user, the attacker then downloaded another binary to be used for privilege escalation. What is the name and the SHA256 hash of the binary?
+**After discovering the privileges of the current user, the attacker then downloaded another binary to be used for privilege escalation. What is the name and the SHA256 hash of the binary?**
 
 * Open Brim
 * Load C:\Users\user\Desktop\Incident Files\capture.pcapng
@@ -182,15 +182,15 @@ After discovering the privileges of the current user, the attacker then download
 * Navigate the diagram and click on the "Process Create" box
 * SHA256 of spf.exe is there
 
-Based on the SHA256 hash of the binary, what is the name of the tool used?
+**Based on the SHA256 hash of the binary, what is the name of the tool used?**
 
 * Search the hash in https://www.virustotal.com
 
-The tool exploits a specific privilege owned by the user. What is the name of the privilege?
+**The tool exploits a specific privilege owned by the user. What is the name of the privilege?**
 
 * Search the binary name in google, first results have the answer
 
-Then, the attacker executed the tool with another binary to establish a c2 connection. What is the name of the binary?
+**Then, the attacker executed the tool with another binary to establish a c2 connection. What is the name of the binary?**
 
 * Open Sysmon View
 * Load C:\Users\user\Desktop\Incident Files\sysmon.xml
@@ -200,7 +200,7 @@ Then, the attacker executed the tool with another binary to establish a c2 conne
 * Navigate the diagram and click on the "Process Create" box
 * Full command of spf.exe is there, first parameter is C:\ProgramData\final.exe
 
-The binary connects to a different port from the first c2 connection. What is the port used?
+**The binary connects to a different port from the first c2 connection. What is the port used?**
 
 * Open Sysmon View
 * Load C:\Users\user\Desktop\Incident Files\sysmon.xml
@@ -226,26 +226,26 @@ Get-Content -Path "C:\Users\user\Desktop\Incident Files\9ab62b5-8080.csv" | ForE
 } | Out-File -FilePath "C:\Users\user\Desktop\Incident Files\9ab62b5-8080.log"
 ```
 
-Upon achieving SYSTEM access, the attacker then created two users. What are the account names?
+**Upon achieving SYSTEM access, the attacker then created two users. What are the account names?**
 
 * Search for `net user /add` in C:\Users\user\Desktop\Incident Files\9ab62b5-8080.log
 
-Prior to the successful creation of the accounts, the attacker executed commands that failed in the creation attempt. What is the missing option that made the attempt fail?
+**Prior to the successful creation of the accounts, the attacker executed commands that failed in the creation attempt. What is the missing option that made the attempt fail?**
 
 * Search for `net user` in C:\Users\user\Desktop\Incident Files\9ab62b5-8080.log
 
-What is the event ID that indicates the account creation activity?
+**What is the event ID that indicates the account creation activity?**
 
 * Just Google search it or ask ChatGPT
 
-The attacker added one of the accounts in the local administrator's group. What is the command used by the attacker?
+**The attacker added one of the accounts in the local administrator's group. What is the command used by the attacker?**
 
 * Search for `net localgroup` in C:\Users\user\Desktop\Incident Files\9ab62b5-8080.log
 
-What is the event ID that indicates the addition to a sensitive local group?
+**What is the event ID that indicates the addition to a sensitive local group?**
 
 * Just Google search it or ask ChatGPT
 
-After the account creation, the attacker executed a technique to establish persistent administrative access. What is the command executed by the attacker to achieve this?
+**After the account creation, the attacker executed a technique to establish persistent administrative access. What is the command executed by the attacker to achieve this?**
 
 * Search for `sc.exe` in C:\Users\user\Desktop\Incident Files\9ab62b5-8080.log

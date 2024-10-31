@@ -2,7 +2,7 @@
 
 ## Task 2 The Message
 
-What is the time of execution of the process that created the text file? Timezone UTC (Format YYYY-MM-DD hh:mm:ss)
+**What is the time of execution of the process that created the text file?**
 
 ```powershell
 Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational" | `
@@ -17,8 +17,8 @@ ForEach-Object {
 
 ## Task 3 Something Wrong
 
-What is the filename of this "installer"? (Including the file extension)
-What is the download location of this installer?
+**What is the filename of this "installer"?**
+**What is the download location of this installer?**
 
 ```powershell
 $startDate = Get-Date "2024-01-08 14:00:00"
@@ -38,7 +38,7 @@ ForEach-Object {
 }
 ```
 
-The installer encrypts files and then adds a file extension to the end of the file name. What is this file extension?
+**The installer encrypts files and then adds a file extension to the end of the file name. What is this file extension?**
 
 ```powershell
 Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational" | `
@@ -52,7 +52,7 @@ ForEach-Object {
 }
 ```
 
-The installer reached out to an IP. What is this IP?
+**The installer reached out to an IP. What is this IP?**
 
 ```powershell
 Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational" | `
@@ -68,7 +68,7 @@ ForEach-Object {
 
 ## Task 4 Back to Normal
 
-The threat actor logged in via RDP right after the “installer” was downloaded. What is the source IP?
+**The threat actor logged in via RDP right after the “installer” was downloaded. What is the source IP?**
 
 ```powershell
 Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational" | `
@@ -85,7 +85,7 @@ ForEach-Object {
 }
 ```
 
-This other person downloaded a file and ran it. When was this file run? Timezone UTC (Format YYYY-MM-DD hh:mm:ss)
+**This other person downloaded a file and ran it. When was this file run?**
 
 ```powershell
 $startDate = Get-Date "2024-01-08 14:00:00"
