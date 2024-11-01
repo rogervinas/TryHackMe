@@ -26,3 +26,4 @@
   - [Secret Recipe](rooms/registry4n6.md)
   - [Tempest](rooms/tempestincident.md)
   - [Boogeyman 1](rooms/boogeyman1.md)
+  - [Boogeyman 2](rooms/boogeyman2.md)
