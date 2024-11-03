@@ -27,3 +27,4 @@
   - [Tempest](rooms/tempestincident.md)
   - [Boogeyman 1](rooms/boogeyman1.md)
   - [Boogeyman 2](rooms/boogeyman2.md)
+  - [Boogeyman 3](rooms/boogeyman3.md)
