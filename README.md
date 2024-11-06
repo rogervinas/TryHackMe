@@ -31,3 +31,4 @@
 - Web Fundamentals
   - Web Hacking Fundamentals
     - [OWASP Top 10 - 2021](rooms/owasptop102021.md)
+    - [Pickle Rick](rooms/picklerick.md)
