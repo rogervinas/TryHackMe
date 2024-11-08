@@ -34,4 +34,5 @@
     - [Pickle Rick](rooms/picklerick.md)
 - Cyber Security 101
   - Offensive Security Tooling
+    - [Shells Overview](rooms/shellsoverview.md)
     - [SQLMap: The Basics](rooms/sqlmapthebasics.md)
