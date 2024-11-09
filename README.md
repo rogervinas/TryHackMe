@@ -36,3 +36,4 @@
   - Offensive Security Tooling
     - [Shells Overview](rooms/shellsoverview.md)
     - [SQLMap: The Basics](rooms/sqlmapthebasics.md)
+    - [IDS Fundamentals](rooms/idsfundamentals.md)
