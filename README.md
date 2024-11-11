@@ -33,8 +33,10 @@
     - [OWASP Top 10 - 2021](rooms/owasptop102021.md)
     - [Pickle Rick](rooms/picklerick.md)
 - Cyber Security 101
+  - Exploitation Basics
+    - [Blue](rooms/blue.md)
   - Offensive Security Tooling
     - [Shells Overview](rooms/shellsoverview.md)
     - [SQLMap: The Basics](rooms/sqlmapthebasics.md)
+  - Security Solutions
     - [IDS Fundamentals](rooms/idsfundamentals.md)
-    - [Blue](rooms/blue.md)
