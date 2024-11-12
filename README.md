@@ -40,3 +40,6 @@
     - [SQLMap: The Basics](rooms/sqlmapthebasics.md)
   - Security Solutions
     - [IDS Fundamentals](rooms/idsfundamentals.md)
+- Security Engineer
+  - Introduction to Security Engineering
+    - [Introduction to Cryptography](rooms/cryptographyintro.md)
