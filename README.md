@@ -43,3 +43,5 @@
 - Security Engineer
   - Introduction to Security Engineering
     - [Introduction to Cryptography](rooms/cryptographyintro.md)
+  - Network and System Security  
+    - [Linux System Hardening](rooms/linuxsystemhardening.md)
