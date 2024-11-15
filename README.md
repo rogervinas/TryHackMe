@@ -46,3 +46,4 @@
   - Network and System Security  
     - [Linux System Hardening](rooms/linuxsystemhardening.md)
     - [Microsoft Windows Hardening](rooms/microsoftwindowshardening.md)
+    - [Active Directory Hardening](rooms/activedirectoryhardening.md)
