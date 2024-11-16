@@ -48,3 +48,4 @@
     - [Microsoft Windows Hardening](rooms/microsoftwindowshardening.md)
     - [Active Directory Hardening](rooms/activedirectoryhardening.md)
     - [Network Device Hardening](rooms/networkdevicehardening.md)
+    - [Virtualization and Containers](https://tryhackme.com/r/room/virtualizationandcontainers)
