@@ -47,3 +47,4 @@
     - [Linux System Hardening](rooms/linuxsystemhardening.md)
     - [Microsoft Windows Hardening](rooms/microsoftwindowshardening.md)
     - [Active Directory Hardening](rooms/activedirectoryhardening.md)
+    - [Network Device Hardening](rooms/networkdevicehardening.md)
