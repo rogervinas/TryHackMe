@@ -2,7 +2,7 @@
 
 [![My Profile](https://tryhackme-badges.s3.amazonaws.com/roger.vinas.png)](https://tryhackme.com/p/roger.vinas)
 
-- [Cyber Defense](https://tryhackme.com/r/paths)
+- Cyber Defense
   - Threat Emulation
     - [Attacktive Directory](rooms/attacktivedirectory.md)
     - [Attacking Kerberos](rooms/attackingkerberos.md)
@@ -48,4 +48,5 @@
     - [Microsoft Windows Hardening](rooms/microsoftwindowshardening.md)
     - [Active Directory Hardening](rooms/activedirectoryhardening.md)
     - [Network Device Hardening](rooms/networkdevicehardening.md)
-    - [Virtualization and Containers](https://tryhackme.com/r/room/virtualizationandcontainers)
+    - [Virtualization and Containers](rooms/virtualizationandcontainers.md)
+    - [Auditing and Monitoring](rooms/auditingandmonitoringse.md)
