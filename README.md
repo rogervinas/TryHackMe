@@ -50,3 +50,5 @@
     - [Network Device Hardening](rooms/networkdevicehardening.md)
     - [Virtualization and Containers](rooms/virtualizationandcontainers.md)
     - [Auditing and Monitoring](rooms/auditingandmonitoringse.md)
+  - Software Security
+    - [SAST](rooms/sast.md)
