@@ -8,6 +8,8 @@ Open http://$MACHINE_IP in a browser and keep it open as contents will change vi
 
 It is important to execute the requests in this order as server changes its internal state.
 
+You can review the javascript code manually or use tools like [semgrep](https://semgrep.dev/) which will detect vulnerabilities about executing `fs.readFile` with a not sanitized `filePath`. 
+
 **What is the special order number?**
 
 ```shell
