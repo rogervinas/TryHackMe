@@ -52,3 +52,4 @@
     - [Auditing and Monitoring](rooms/auditingandmonitoringse.md)
   - Software Security
     - [SAST](rooms/sast.md)
+    - [Mother's Secret](rooms/codeanalysis.md)
