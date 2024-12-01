@@ -54,3 +54,5 @@
     - [SAST](rooms/sast.md)
     - [Mother's Secret](rooms/codeanalysis.md)
     - [Traverse](rooms/traverse.md)
+  - Managing Incidents
+    - [Logging for Accountability](rooms/loggingforaccountability.md)
