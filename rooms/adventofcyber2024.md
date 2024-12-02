@@ -25,3 +25,7 @@ Go to https://github.com/MM-WarevilleTHM/M.M
 Go to https://github.com/MM-WarevilleTHM/IS/commits/main/
 
 **What's with all these GitHub repos? Could they hide something else?**
+
+* https://github.com/MM-WarevilleTHM/M.M/commits/main/ has 5 commits
+* Both repos have some forks
+* Other than that, nothing ¯\_(ツ)_/¯
