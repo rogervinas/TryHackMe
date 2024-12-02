@@ -1,6 +1,6 @@
 # 🎄 [Advent of Cyber 2024](https://tryhackme.com/r/room/adventofcyber2024)
 
-## Day 1: Maybe SOC-mas music, he thought, doesn't come from a store?
+## Day 1: Maybe SOC-mas music, he thought, doesn't come from a store?
 
 **Operational Security (OPSEC)** is a set of principals and tactics used to attempt to protect the security of an operator or operation. An example of this may be using code names instead of your real names, or using a proxy to conceal your IP address.
 
