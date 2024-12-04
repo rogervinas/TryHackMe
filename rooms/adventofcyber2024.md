@@ -56,7 +56,7 @@ Go to https://github.com/MM-WarevilleTHM/IS/commits/main/
 * Check `powershell.exe` executions with a `-EncodedCommand` value
 * Put that value in [CyberChef](https://gchq.github.io/CyberChef/#recipe=From_Base64('A-Za-z0-9%2B/%3D',true,false)Decode_text('UTF-16LE%20(1200)')&input=U1FCdUFITUFkQUJoQUd3QWJBQXRBRmNBYVFCdUFHUUFid0IzQUhNQVZRQndBR1FBWVFCMEFHVUFJQUF0QUVFQVl3QmpBR1VBY0FCMEFFRUFiQUJzQUNBQUxRQkJBSFVBZEFCdkFGSUFaUUJpQUc4QWJ3QjBBQT09)
 
-## Log analysis Day 3 - Even if I wanted to go, their vulnerabilities wouldn't allow it
+## Log analysis - Day 3: Even if I wanted to go, their vulnerabilities wouldn't allow it
 
 **BLUE: Where was the web shell uploaded to?**
 **BLUE: What IP address accessed the web shell?**
@@ -92,3 +92,42 @@ Go to https://github.com/MM-WarevilleTHM/IS/commits/main/
   ```
 * Go to http://frostypines.thm/media/images/rooms/shell.php?command=ls
 * Go to http://frostypines.thm/media/images/rooms/shell.php?command=cat%20flag.txt
+
+## Atomic Red Team - Day 4: I’m all atomic inside!
+
+**What was the flag found in the .txt file that is found in the same directory as the PhishingAttachment.xslm artefact?**
+
+```powershell
+Invoke-AtomicTest T1566.001 -TestNumbers 1
+cat C:\Users\Administrator\AppData\Local\Temp\PhishingAttachment.txt
+Invoke-AtomicTest T1566.001-1 -cleanup
+```
+
+**What ATT&CK technique ID would be our point of interest?**
+
+* https://attack.mitre.org/techniques/T1059/
+
+**What ATT&CK subtechnique ID focuses on the Windows Command Shell?**
+
+* https://attack.mitre.org/techniques/T1059/003/
+
+**What is the name of the Atomic Test to be simulated?**
+
+Search for a test named "ware":
+```powershell
+Invoke-AtomicTest T1059.003 -ShowDetailsBrief
+```
+
+**What is the name of the file used in the test?**
+
+Search for a txt file:
+```powershell
+ Invoke-AtomicTest T1059.003 -ShowDetails -TestNumbers 4
+```
+
+**What is the flag found from this Atomic Test?**
+
+Execute the test which should print a PDF containing the flag:
+```powershell
+Invoke-AtomicTest T1059.003 -TestNumbers 4
+```
