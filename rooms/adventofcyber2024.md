@@ -151,3 +151,20 @@ POST /wishlist.php using Burp Repeater:
 **What is the flag seen on the possible proof of sabotage?**
 
 Go to http://MACHINE_IP/CHANGELOG
+
+## Sandboxes - Day 6: If I can't find a nice malware to use, I'm not going
+
+**What is the flag displayed in the popup window after the EDR detects the malware?**
+
+* First execute the EDR (Endpoint Detection and Response) in one powershell terminal:
+  ```powershell
+  C:\Tools\JingleBells.ps1
+  ```
+* Then execute `C:\Tools\Malware\MerryChristmas.exe` via File Explorer
+
+**What is the flag found in the malstrings.txt document after running floss.exe?**
+
+```powershell
+C:\Tools\FLOSS\floss.exe C:\Tools\Malware\MerryChristmas.exe | Out-file C:\Tools\malstrings.txt
+Select-String -Path C:\Tools\malstrings.txt -Pattern THM
+```
