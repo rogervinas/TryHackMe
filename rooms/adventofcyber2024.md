@@ -156,10 +156,7 @@ Go to http://MACHINE_IP/CHANGELOG
 
 **What is the flag displayed in the popup window after the EDR detects the malware?**
 
-* First execute the EDR (Endpoint Detection and Response) in one powershell terminal:
-  ```powershell
-  C:\Tools\JingleBells.ps1
-  ```
+* First execute the EDR (Endpoint Detection and Response) `C:\Tools\JingleBells.ps1`
 * Then execute `C:\Tools\Malware\MerryChristmas.exe` via File Explorer
 
 **What is the flag found in the malstrings.txt document after running floss.exe?**
