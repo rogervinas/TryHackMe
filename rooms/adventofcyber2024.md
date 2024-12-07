@@ -165,3 +165,91 @@ Go to http://MACHINE_IP/CHANGELOG
 C:\Tools\FLOSS\floss.exe C:\Tools\Malware\MerryChristmas.exe | Out-file C:\Tools\malstrings.txt
 Select-String -Path C:\Tools\malstrings.txt -Pattern THM
 ```
+
+## AWS log analysis - Day 7: Oh, no. I'M SPEAKING IN CLOUDTRAIL!
+
+**What is the other activity made by the user glitch aside from the ListObject action?** ➕ **What is the source IP related to the S3 bucket activities of the user glitch?**
+
+```shell
+jq -r '["User_Name", "Event_Name", "IP"],
+( .Records[] 
+  | select(
+      .eventSource == "s3.amazonaws.com"
+      and .requestParameters.bucketName=="wareville-care4wares"
+      and .userIdentity.userName=="glitch"
+    )
+  | [.userIdentity.userName, .eventName, .sourceIPAddress]
+) | @tsv' ~/wareville_logs/cloudtrail_log.json
+```
+
+**Based on the eventSource field, what AWS service generates the ConsoleLogin event?**
+
+```shell
+jq -r '.Records[] | select(.eventName == "ConsoleLogin") | .eventSource' \ cloudtrail_log.json | sort -u
+```
+
+**When did the anomalous user trigger the ConsoleLogin event?**
+
+```shell
+jq -r '["User_Name", "Event_Time", "IP"],
+( .Records[] 
+  | select(
+      .eventName == "ConsoleLogin"
+      and .sourceIPAddress == "53.94.201.69"
+      and .userIdentity.userName == "glitch"
+    )
+  | [.userIdentity.userName, .eventTime, .sourceIPAddress]
+) | @tsv' ~/wareville_logs/cloudtrail_log.json
+```
+
+**What was the name of the user that was created by the mcskidy user?**
+
+```shell
+jq -r '["User_Name", "Event_Time", "Event_Name", "User_Created"],
+( .Records[] 
+  | select(
+      .eventName == "CreateLoginProfile"
+      and .userIdentity.userName == "mcskidy"
+    )
+  | [.userIdentity.userName, .eventTime, .eventName, .requestParameters.userName]
+) | @tsv' ~/wareville_logs/cloudtrail_log.json
+```
+
+**What type of access was assigned to the anomalous user?**
+
+```shell
+jq -r '["User_Name", "Event_Time", "Event_Name", "User_Updated", "Policy"],
+( .Records[] 
+  | select(
+      .eventName == "AttachUserPolicy"
+      and .userIdentity.userName == "mcskidy"
+    )
+  | [.userIdentity.userName, .eventTime, .eventName, .requestParameters.userName, .requestParameters.policyArn]
+) | @tsv' ~/wareville_logs/cloudtrail_log.json
+```
+
+**Which IP does Mayor Malware typically use to log into AWS?**
+
+```shell
+jq -r '.Records[] | select(.userIdentity.userName == "mayor_malware") | .sourceIPAddress' \
+~/wareville_logs/cloudtrail_log.json | sort -u
+```
+
+**What is McSkidy's actual IP address?**
+
+```shell
+jq -r '.Records[]
+| select(
+  .userIdentity.userName == "mcskidy"
+  and .sourceIPAddress != "53.94.201.69"
+) | .sourceIPAddress' \
+~/wareville_logs/cloudtrail_log.json | sort -u
+```
+
+**What is the bank account number owned by Mayor Malware?**
+
+```shell
+cat ~/wareville_logs/rds.log | \
+grep "INSERT INTO wareville_bank_transactions" | grep "Mayor Malware" | \
+grep -oP "VALUES \('\K[^']+" | sort -u
+```
