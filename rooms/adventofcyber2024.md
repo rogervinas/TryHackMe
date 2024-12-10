@@ -1,5 +1,17 @@
 # 🎄 [Advent of Cyber 2024](https://tryhackme.com/r/room/adventofcyber2024)
 
+[OPSEC - Day 1: Maybe SOC-mas music, he thought, doesn't come from a store?](#opsec---day-1-maybe-soc-mas-music-he-thought-doesnt-come-from-a-store)
+[Log analysis - Day 2: One man's false positive is another man's potpourri](#log-analysis---day-2-one-mans-false-positive-is-another-mans-potpourri)
+[Log analysis - Day 3: Even if I wanted to go, their vulnerabilities wouldn't allow it](#log-analysis---day-3-even-if-i-wanted-to-go-their-vulnerabilities-wouldnt-allow-it)
+[Atomic Red Team - Day 4: I’m all atomic inside!](#atomic-red-team---day-4-im-all-atomic-inside)
+[XXE - Day 5: SOC-mas XX-what-ee?](#xxe---day-5-soc-mas-xx-what-ee)
+[Sandboxes - Day 6: If I can't find a nice malware to use, I'm not going](#sandboxes---day-6-if-i-cant-find-a-nice-malware-to-use-im-not-going)
+[AWS log analysis - Day 7: Oh, no. I'M SPEAKING IN CLOUDTRAIL!](#aws-log-analysis---day-7-oh-no-im-speaking-in-cloudtrail)
+[Shellcodes - Day 8: Shellcodes of the world, unite!](#shellcodes---day-8-shellcodes-of-the-world-unite)
+[GRC - Day 9: Nine o'clock, make GRC fun, tell no one](#grc---day-9-nine-oclock-make-grc-fun-tell-no-one)
+[GRC - Day 9: Nine o'clock, make GRC fun, tell no one]
+[## Phishing - Day 10: He had a brain full of macros, and had shells in his soul](#phishing---day-10-he-had-a-brain-full-of-macros-and-had-shells-in-his-soul)
+
 ## OPSEC - Day 1: Maybe SOC-mas music, he thought, doesn't come from a store?
 
 **Operational Security (OPSEC)** is a set of principals and tactics used to attempt to protect the security of an operator or operation. An example of this may be using code names instead of your real names, or using a proxy to conceal your IP address.
@@ -330,7 +342,7 @@ $thandle = [CrtThread]::CreateThread(0, 0, $addr, 0, 0, 0)
 type C:\Users\glitch\Desktop\flag.txt
 ```
 
-## GRC - Day 9: Nine o'clock, make GRC fun, tell no one
+## GRC - Day 9: Nine o'clock, make GRC fun, tell no one
 
 Just follow the instructions, you can re-edit your assessments until you get all as "Perfect assessment" before completing each step
 
