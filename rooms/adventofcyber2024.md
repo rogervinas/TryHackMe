@@ -9,7 +9,6 @@
 * [AWS log analysis - Day 7: Oh, no. I'M SPEAKING IN CLOUDTRAIL!](#aws-log-analysis---day-7-oh-no-im-speaking-in-cloudtrail)
 * [Shellcodes - Day 8: Shellcodes of the world, unite!](#shellcodes---day-8-shellcodes-of-the-world-unite)
 * [GRC - Day 9: Nine o'clock, make GRC fun, tell no one](#grc---day-9-nine-oclock-make-grc-fun-tell-no-one)
-* [GRC - Day 9: Nine o'clock, make GRC fun, tell no one]
 * [Phishing - Day 10: He had a brain full of macros, and had shells in his soul](#phishing---day-10-he-had-a-brain-full-of-macros-and-had-shells-in-his-soul)
 
 ## OPSEC - Day 1: Maybe SOC-mas music, he thought, doesn't come from a store?
