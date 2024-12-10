@@ -1,17 +1,17 @@
 # 🎄 [Advent of Cyber 2024](https://tryhackme.com/r/room/adventofcyber2024)
 
-* [OPSEC - Day 1: Maybe SOC-mas music, he thought, doesn't come from a store?](#opsec---day-1-maybe-soc-mas-music-he-thought-doesnt-come-from-a-store)
-* [Log analysis - Day 2: One man's false positive is another man's potpourri](#log-analysis---day-2-one-mans-false-positive-is-another-mans-potpourri)
-* [Log analysis - Day 3: Even if I wanted to go, their vulnerabilities wouldn't allow it](#log-analysis---day-3-even-if-i-wanted-to-go-their-vulnerabilities-wouldnt-allow-it)
-* [Atomic Red Team - Day 4: I’m all atomic inside!](#atomic-red-team---day-4-im-all-atomic-inside)
-* [XXE - Day 5: SOC-mas XX-what-ee?](#xxe---day-5-soc-mas-xx-what-ee)
-* [Sandboxes - Day 6: If I can't find a nice malware to use, I'm not going](#sandboxes---day-6-if-i-cant-find-a-nice-malware-to-use-im-not-going)
-* [AWS log analysis - Day 7: Oh, no. I'M SPEAKING IN CLOUDTRAIL!](#aws-log-analysis---day-7-oh-no-im-speaking-in-cloudtrail)
-* [Shellcodes - Day 8: Shellcodes of the world, unite!](#shellcodes---day-8-shellcodes-of-the-world-unite)
-* [GRC - Day 9: Nine o'clock, make GRC fun, tell no one](#grc---day-9-nine-oclock-make-grc-fun-tell-no-one)
-* [Phishing - Day 10: He had a brain full of macros, and had shells in his soul](#phishing---day-10-he-had-a-brain-full-of-macros-and-had-shells-in-his-soul)
+* [Day 1: OPSEC - Maybe SOC-mas music, he thought, doesn't come from a store?](#day-1-opsec---maybe-soc-mas-music-he-thought-doesnt-come-from-a-store)
+* [Day 2: Log analysis - One man's false positive is another man's potpourri](#day-2-log-analysis---one-mans-false-positive-is-another-mans-potpourri)
+* [Day 3: Log analysis - Even if I wanted to go, their vulnerabilities wouldn't allow it](#day-3-log-analysis---even-if-i-wanted-to-go-their-vulnerabilities-wouldnt-allow-it)
+* [Day 4: Atomic Red Team - I’m all atomic inside!](#day-4-atomic-red-team---im-all-atomic-inside)
+* [Day 5: XXE - SOC-mas XX-what-ee?](#day-5-xxe---soc-mas-xx-what-ee)
+* [Day 6: Sandboxes - If I can't find a nice malware to use, I'm not going](#day-6-sandboxes---if-i-cant-find-a-nice-malware-to-use-im-not-going)
+* [Day 7: AWS log analysis - Oh, no. I'M SPEAKING IN CLOUDTRAIL!](#day-7-aws-log-analysis---oh-no-im-speaking-in-cloudtrail)
+* [Day 8: Shellcodes - Shellcodes of the world, unite!](#day-8-shellcodes---shellcodes-of-the-world-unite)
+* [Day 9: GRC - Nine o'clock, make GRC fun, tell no one](#day-9-grc---nine-oclock-make-grc-fun-tell-no-one)
+* [Day 10: Phishing - He had a brain full of macros, and had shells in his soul](#day-10-phishing---he-had-a-brain-full-of-macros-and-had-shells-in-his-soul)
 
-## OPSEC - Day 1: Maybe SOC-mas music, he thought, doesn't come from a store?
+## Day 1: OPSEC - Maybe SOC-mas music, he thought, doesn't come from a store?
 
 **Operational Security (OPSEC)** is a set of principals and tactics used to attempt to protect the security of an operator or operation. An example of this may be using code names instead of your real names, or using a proxy to conceal your IP address.
 
@@ -41,7 +41,7 @@ Go to https://github.com/MM-WarevilleTHM/IS/commits/main/
 * Both repos have some forks
 * Other than that, nothing `¯\_(ツ)_/¯`
 
-## Log analysis - Day 2: One man's false positive is another man's potpourri
+## Day 2: Log analysis - One man's false positive is another man's potpourri
 
 **What is the name of the account causing all the failed login attempts?**
 **How many failed logon attempts were observed?**
@@ -67,7 +67,7 @@ Go to https://github.com/MM-WarevilleTHM/IS/commits/main/
 * Check `powershell.exe` executions with a `-EncodedCommand` value
 * Put that value in [CyberChef](https://gchq.github.io/CyberChef/#recipe=From_Base64('A-Za-z0-9%2B/%3D',true,false)Decode_text('UTF-16LE%20(1200)')&input=U1FCdUFITUFkQUJoQUd3QWJBQXRBRmNBYVFCdUFHUUFid0IzQUhNQVZRQndBR1FBWVFCMEFHVUFJQUF0QUVFQVl3QmpBR1VBY0FCMEFFRUFiQUJzQUNBQUxRQkJBSFVBZEFCdkFGSUFaUUJpQUc4QWJ3QjBBQT09)
 
-## Log analysis - Day 3: Even if I wanted to go, their vulnerabilities wouldn't allow it
+## Day 3: Log analysis - Even if I wanted to go, their vulnerabilities wouldn't allow it
 
 **BLUE: Where was the web shell uploaded to?**
 **BLUE: What IP address accessed the web shell?**
@@ -104,7 +104,7 @@ Go to https://github.com/MM-WarevilleTHM/IS/commits/main/
 * Go to http://frostypines.thm/media/images/rooms/shell.php?command=ls
 * Go to http://frostypines.thm/media/images/rooms/shell.php?command=cat%20flag.txt
 
-## Atomic Red Team - Day 4: I’m all atomic inside!
+## Day 4: Atomic Red Team - I’m all atomic inside!
 
 **What was the flag found in the .txt file that is found in the same directory as the PhishingAttachment.xslm artefact?**
 
@@ -143,7 +143,7 @@ Execute the test which should print a PDF containing the flag:
 Invoke-AtomicTest T1059.003 -TestNumbers 4
 ```
 
-## XXE - Day 5: SOC-mas XX-what-ee?
+## Day 5: XXE - SOC-mas XX-what-ee?
 
 **What is the flag discovered after navigating through the wishes?**
 
@@ -163,7 +163,7 @@ POST /wishlist.php using Burp Repeater:
 
 Go to http://MACHINE_IP/CHANGELOG
 
-## Sandboxes - Day 6: If I can't find a nice malware to use, I'm not going
+## Day 6: Sandboxes - If I can't find a nice malware to use, I'm not going
 
 **What is the flag displayed in the popup window after the EDR detects the malware?**
 
@@ -177,7 +177,7 @@ C:\Tools\FLOSS\floss.exe C:\Tools\Malware\MerryChristmas.exe | Out-file C:\Tools
 Select-String -Path C:\Tools\malstrings.txt -Pattern THM
 ```
 
-## AWS log analysis - Day 7: Oh, no. I'M SPEAKING IN CLOUDTRAIL!
+## Day 7: AWS log analysis - Oh, no. I'M SPEAKING IN CLOUDTRAIL!
 
 **What is the other activity made by the user glitch aside from the ListObject action?** ➕ **What is the source IP related to the S3 bucket activities of the user glitch?**
 
@@ -265,7 +265,7 @@ grep "INSERT INTO wareville_bank_transactions" | grep "Mayor Malware" | \
 grep -oP "VALUES \('\K[^']+" | sort -u
 ```
 
-## Shellcodes - Day 8: Shellcodes of the world, unite!
+## Day 8: Shellcodes - Shellcodes of the world, unite!
 
 **What is the flag value once Glitch gets reverse shell on the digital vault using port 4444?**
 
@@ -341,11 +341,11 @@ $thandle = [CrtThread]::CreateThread(0, 0, $addr, 0, 0, 0)
 type C:\Users\glitch\Desktop\flag.txt
 ```
 
-## GRC - Day 9: Nine o'clock, make GRC fun, tell no one
+## Day 9: GRC - Nine o'clock, make GRC fun, tell no one
 
 Just follow the instructions, you can re-edit your assessments until you get all as "Perfect assessment" before completing each step
 
-## Phishing - Day 10: He had a brain full of macros, and had shells in his soul
+## Day 10: Phishing - He had a brain full of macros, and had shells in his soul
 
 **What is the flag value inside the flag.txt file that’s located on the Administrator’s desktop?**
 
