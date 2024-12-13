@@ -554,5 +554,5 @@ Hint: Exploit the application and SEND a message as Mayor Malware while capturin
 * Intercept the message `42["send_msg",{"txt":"Hello bla bla bla","sender":"5"}]`
 * Forward it as `42["send_msg",{"txt":"Hello bla bla bla","sender":"8"}]`
 * Intercept off
-* Wait for your message to appear as sent by the Mayor Malware
+* Wait for your message to appear as sent by Mayor Malware
 * Wait for Mayor Malware to reply "I didn't send that last message! What is happening?" with the flag
