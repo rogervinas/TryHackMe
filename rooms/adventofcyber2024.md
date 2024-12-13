@@ -11,6 +11,7 @@
 * [Day 9: GRC - Nine o'clock, make GRC fun, tell no one](#day-9-grc---nine-oclock-make-grc-fun-tell-no-one)
 * [Day 10: Phishing - He had a brain full of macros, and had shells in his soul](#day-10-phishing---he-had-a-brain-full-of-macros-and-had-shells-in-his-soul)
 * [Day 11: Wi-Fi attacks - If you'd like to WPA, press the star key!](#day-11-wi-fi-attacks---if-youd-like-to-wpa-press-the-star-key)
+* [Day 13: Websockets - It came without buffering! It came without lag!](#day-13-websockets---it-came-without-buffering-it-came-without-lag)
 
 ## Day 1: OPSEC - Maybe SOC-mas music, he thought, doesn't come from a store?
 
@@ -537,3 +538,21 @@ SSID=$(sudo iw dev wlan2 link | grep SSID | awk '{print $2}')
 BSSID=$(sudo iw dev wlan2 link | grep "Connected to" | awk '{print $3}')
 echo $SSID, $BSSID
 ```
+
+## Day 13: Websockets - It came without buffering! It came without lag!
+
+**What is the value of Flag1?** 
+
+Just follow the instructions!
+
+**What is the value of Flag2?**
+
+Hint: Exploit the application and SEND a message as Mayor Malware while capturing the traffic
+
+* Refresh the page to start again
+* Send a message "Hello bla bla bla"
+* Intercept the message `42["send_msg",{"txt":"Hello bla bla bla","sender":"5"}]`
+* Forward it as `42["send_msg",{"txt":"Hello bla bla bla","sender":"8"}]`
+* Intercept off
+* Wait for your message to appear as sent by the Mayor Malware
+* Wait for Mayor Malware to reply "I didn't send that last message! What is happening?" with the flag
