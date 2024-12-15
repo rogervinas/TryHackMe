@@ -13,6 +13,7 @@
 * [Day 11: Wi-Fi attacks - If you'd like to WPA, press the star key!](#day-11-wi-fi-attacks---if-youd-like-to-wpa-press-the-star-key)
 * [Day 13: Websockets - It came without buffering! It came without lag!](#day-13-websockets---it-came-without-buffering-it-came-without-lag)
 * [Day 14: Certificate mismanagement - Even if we're horribly mismanaged, there'll be no sad faces on SOC-mas!](#day-14-certificate-mismanagement---even-if-were-horribly-mismanaged-therell-be-no-sad-faces-on-soc-mas)
+* [Day 15: Active Directory - Be it ever so heinous, there's no place like Domain Controller](#day-15-active-directory---be-it-ever-so-heinous-theres-no-place-like-domain-controller)
 
 ## Day 1: OPSEC - Maybe SOC-mas music, he thought, doesn't come from a store?
 
@@ -621,4 +622,37 @@ curl -H 'Content-Type: application/x-www-form-urlencoded' \
   --data-binary 'username=marta_mayware&password=xxxx' \
   -s -k -L -c $cookies_file -b $cookies_file \
   https://gift-scheduler.thm/login.php | grep FLAG
+```
+
+## Day 15: Active Directory - Be it ever so heinous, there's no place like Domain Controller
+
+**On what day was Glitch_Malware last logged in?**
+**What event ID shows the login of the Glitch_Malware user?**
+
+You can search in **Event Viewer** or execute this **PowerShell** command:
+```powershell
+Get-WinEvent -LogName Security -FilterXPath "*[System[(EventID=4624)] and EventData[Data[@Name='TargetUserName']='Glitch_Malware']]" |
+  Select-Object TimeCreated, Id, Message
+```
+
+**Read the PowerShell history of the Administrator account. What was the command that was used to enumerate Active Directory users?**
+
+```powershell
+cat $Env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt | Select-String -SimpleMatch "AD" | Select-Object -First 1
+```
+
+**Look in the PowerShell log file located in `Application and Services Logs -> Windows PowerShell`. What was Glitch_Malware's set password?**
+
+You can search in **Event Viewer** or execute this **PowerShell** command:
+```powershell
+Get-WinEvent -LogName "Windows PowerShell" |
+Where-Object { $_.ToXml() -like "*Glitch_Malware*" -and $_.ToXml() -like "*Password*" } |
+Select-Object -First 1 |
+ForEach-Object { $_.ToXml() }
+```
+
+**Review the Group Policy Objects present on the machine. What is the name of the installed GPO?**
+
+```powershell
+Get-GPO -All | Where-Object { $_.DisplayName -like "Malicious*" }
 ```
