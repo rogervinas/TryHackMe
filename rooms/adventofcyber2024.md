@@ -377,9 +377,9 @@ mv /root/.msf4/local/msf.docm /root/invoice.docm
 
 3) Send the phishing email:
 * Go to http://MAILSERVER_IP
-* Login as **info@socnas.thm**, password **MerryPhishMas!**
+* Login as `info@socnas.thm`, password `MerryPhishMas!`
 * New email:
-  * To: marta@socmas.thm
+  * To: `marta@socmas.thm`
   * Subject: Invoice
   * Body: Please find attached invoice, best regards! (bla bla bla)
   * Attach /root/invoice.docm
@@ -560,20 +560,22 @@ Hint: Exploit the application and SEND a message as Mayor Malware while capturin
 
 ## Day 14: Certificate mismanagement - Even if we're horribly mismanaged, there'll be no sad faces on SOC-mas!
 
+Configure MACHINE_IP as `gift-scheduler.thm`:
 ```shell
 export MACHINE_IP=x.x.x.x
-export MACHINE_IP=10.10.247.158
 echo "$MACHINE_IP gift-scheduler.thm" >> /etc/hosts
 ```
 
-Go to https://gift-scheduler.thm/
+Go to https://gift-scheduler.thm/ and login as `mayor_malware` (password `G4rbag3Day`)
 
+Configure **Burp** proxy as instructed and then start traffic:
+```shell
 export ATTACKBOX_IP=x.x.x.x
-export ATTACKBOX_IP=10.10.117.32
 echo "$ATTACKBOX_IP wareville-gw" >> /etc/hosts
 
 cd ~/Rooms/AoC2024/Day14
 ./route-elf-traffic.sh 
+```
 
 **What is the name of the CA that has signed the Gift Scheduler certificate?**
 
