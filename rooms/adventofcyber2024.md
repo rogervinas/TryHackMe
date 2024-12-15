@@ -12,6 +12,7 @@
 * [Day 10: Phishing - He had a brain full of macros, and had shells in his soul](#day-10-phishing---he-had-a-brain-full-of-macros-and-had-shells-in-his-soul)
 * [Day 11: Wi-Fi attacks - If you'd like to WPA, press the star key!](#day-11-wi-fi-attacks---if-youd-like-to-wpa-press-the-star-key)
 * [Day 13: Websockets - It came without buffering! It came without lag!](#day-13-websockets---it-came-without-buffering-it-came-without-lag)
+* [Day 14: Certificate mismanagement - Even if we're horribly mismanaged, there'll be no sad faces on SOC-mas!](#day-14-certificate-mismanagement---even-if-were-horribly-mismanaged-therell-be-no-sad-faces-on-soc-mas)
 
 ## Day 1: OPSEC - Maybe SOC-mas music, he thought, doesn't come from a store?
 
@@ -556,3 +557,65 @@ Hint: Exploit the application and SEND a message as Mayor Malware while capturin
 * Intercept off
 * Wait for your message to appear as sent by Mayor Malware
 * Wait for Mayor Malware to reply "I didn't send that last message! What is happening?" with the flag
+
+## Day 14: Certificate mismanagement - Even if we're horribly mismanaged, there'll be no sad faces on SOC-mas!
+
+```shell
+export MACHINE_IP=x.x.x.x
+export MACHINE_IP=10.10.247.158
+echo "$MACHINE_IP gift-scheduler.thm" >> /etc/hosts
+```
+
+Go to https://gift-scheduler.thm/
+
+export ATTACKBOX_IP=x.x.x.x
+export ATTACKBOX_IP=10.10.117.32
+echo "$ATTACKBOX_IP wareville-gw" >> /etc/hosts
+
+cd ~/Rooms/AoC2024/Day14
+./route-elf-traffic.sh 
+
+**What is the name of the CA that has signed the Gift Scheduler certificate?**
+
+You can use the browser "View Certificate" and check the Issuer's Organization, or use this `openssl` command that does the same (the organization is shown as `O = <org>`):
+```shell
+echo | openssl s_client -connect gift-scheduler.thm:443 -showcerts 2>/dev/null | \
+  openssl x509 -noout -issuer | grep -oP '(?<=O = )[^,]*'
+```
+
+**What is the password for the snowballelf account?**
+
+Search inside the requests on the Burp > Proxy > HTTP history for the `POST /login.php` with body `username=snowballelf&password=xxxx`
+
+**Use the credentials for any of the elves to authenticate to the Gift Scheduler website. What is the flag shown on the elves’ scheduling page?**
+
+You can use the browser manually or use this `curl` command (replace `xxxx` with the correct password for `snowballelf`):
+```shell
+cookies_file=$(mktemp)
+curl -H 'Content-Type: application/x-www-form-urlencoded' \
+  --data-binary 'username=snowballelf&password=xxxx' \
+  -s -k -L -c $cookies_file -b $cookies_file \
+  https://gift-scheduler.thm/login.php | grep FLAG
+```
+
+Where:
+* `-k`: Skip SSL certificate verification (required when the certificate is self-signed or from an untrusted CA)
+* `-L`: Follow redirects (required since a successful login returns a 302 Found response that redirects to the main page)
+* `-c <file>`: Save cookies to the specified file (required because the login process sets the `PHPSESSID` cookie, which must be preserved for subsequent requests)
+* `-b <file>`: Send cookies stored in the specified file (required to send the `PHPSESSID` cookie for authenticated requests after logging in)
+* `cookies_file=$(mktemp)`: Use a temporary file to store cookies
+
+**What is the password for Marta May Ware’s account?**
+
+Search inside the requests on the Burp > Proxy > HTTP history for the `POST /login.php` with body `username=marta_mayware&password=xxxx`
+
+**What is the flag shown on the admin page?**
+
+You can use the browser manually or use this `curl` command (replace `xxxx` with the correct password for `marta_mayware`):
+```shell
+cookies_file=$(mktemp)
+curl -H 'Content-Type: application/x-www-form-urlencoded' \
+  --data-binary 'username=marta_mayware&password=xxxx' \
+  -s -k -L -c $cookies_file -b $cookies_file \
+  https://gift-scheduler.thm/login.php | grep FLAG
+```
