@@ -84,7 +84,7 @@ Go to https://github.com/MM-WarevilleTHM/IS/commits/main/
 **RED: What is the contents of the flag.txt?**
 
 * Execute `sudo echo "10.101.200.8 frostypines.thm" >> /etc/hosts`
-* Go to http://frostypines.thm/login.php with user=admin@frostypines.thm and password=admin
+* Go to http://frostypines.thm/login.php and login as user `admin@frostypines.thm` and password `admin`
 * Go to http://frostypines.thm/admin/add_room.php and create a new room uploading `shell.php` as its image:
   ```html
     <html>
@@ -377,7 +377,7 @@ mv /root/.msf4/local/msf.docm /root/invoice.docm
 
 3) Send the phishing email:
 * Go to http://MAILSERVER_IP
-* Login as `info@socnas.thm`, password `MerryPhishMas!`
+* Login as user `info@socnas.thm` and password `MerryPhishMas!`
 * New email:
   * To: `marta@socmas.thm`
   * Subject: Invoice
@@ -391,9 +391,10 @@ meterpreter> cat /Users/Administrator/Desktop/flag.txt
 
 ## Day 11: Wi-Fi attacks - If you'd like to WPA, press the star key!
 
-Connect to the machine (Password321):
+Connect to the machine with user `glitch` and password `Password321`:
 ```shell
-ssh glitch@x.x.x.x
+export MACHINE_IP=x.x.x.x
+ssh glitch@$MACHINE_IP
 ```
 
 Show wireless devices:
@@ -566,7 +567,7 @@ export MACHINE_IP=x.x.x.x
 echo "$MACHINE_IP gift-scheduler.thm" >> /etc/hosts
 ```
 
-Go to https://gift-scheduler.thm/ and login as `mayor_malware` (password `G4rbag3Day`)
+Go to https://gift-scheduler.thm/ and login as user `mayor_malware` and password `G4rbag3Day`
 
 Configure **Burp** proxy as instructed and then start traffic:
 ```shell
