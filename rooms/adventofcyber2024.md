@@ -11,6 +11,7 @@
 * [Day 9: GRC - Nine o'clock, make GRC fun, tell no one](#day-9-grc---nine-oclock-make-grc-fun-tell-no-one)
 * [Day 10: Phishing - He had a brain full of macros, and had shells in his soul](#day-10-phishing---he-had-a-brain-full-of-macros-and-had-shells-in-his-soul)
 * [Day 11: Wi-Fi attacks - If you'd like to WPA, press the star key!](#day-11-wi-fi-attacks---if-youd-like-to-wpa-press-the-star-key)
+* [Day 12: Web timing attacks - If I can’t steal their money, I’ll steal their joy!](#day-12-web-timing-attacks---if-i-cant-steal-their-money-ill-steal-their-joy)
 * [Day 13: Websockets - It came without buffering! It came without lag!](#day-13-websockets---it-came-without-buffering-it-came-without-lag)
 * [Day 14: Certificate mismanagement - Even if we're horribly mismanaged, there'll be no sad faces on SOC-mas!](#day-14-certificate-mismanagement---even-if-were-horribly-mismanaged-therell-be-no-sad-faces-on-soc-mas)
 * [Day 15: Active Directory - Be it ever so heinous, there's no place like Domain Controller](#day-15-active-directory---be-it-ever-so-heinous-theres-no-place-like-domain-controller)
@@ -541,6 +542,12 @@ SSID=$(sudo iw dev wlan2 link | grep SSID | awk '{print $2}')
 BSSID=$(sudo iw dev wlan2 link | grep "Connected to" | awk '{print $3}')
 echo $SSID, $BSSID
 ```
+
+## Day 12: Web timing attacks - If I can’t steal their money, I’ll steal their joy!
+
+**What is the flag value after transferring over $2000 from Glitch's account?**
+
+Just follow the instructions!
 
 ## Day 13: Websockets - It came without buffering! It came without lag!
 
