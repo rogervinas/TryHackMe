@@ -721,8 +721,8 @@ Follow all the steps and create the "Field extractions"
 
 **What is the Session_id associated with the attacker who deleted the recording?**
 
-* Search `index=cctv_feed *Delete* | table Session_id | uniq`
+* Search `index=cctv_feed *Delete* | table Session_id | uniq` and "All time"
 
 **What is the name of the attacker found in the logs, who deleted the CCTV footage?**
 
-* Search `index=cctv_feed *lsr1743nkskt3r722momvhjcs3* | table UserName | uniq`
+* Search `index=cctv_feed *lsr1743nkskt3r722momvhjcs3* | table UserName | uniq` and "All time"
