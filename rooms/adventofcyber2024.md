@@ -16,6 +16,7 @@
 * [Day 14: Certificate mismanagement - Even if we're horribly mismanaged, there'll be no sad faces on SOC-mas!](#day-14-certificate-mismanagement---even-if-were-horribly-mismanaged-therell-be-no-sad-faces-on-soc-mas)
 * [Day 15: Active Directory - Be it ever so heinous, there's no place like Domain Controller](#day-15-active-directory---be-it-ever-so-heinous-theres-no-place-like-domain-controller)
 * [Day 16: Azure - The Wareville’s Key Vault grew three sizes that day](#day-16-azure---the-warevilles-key-vault-grew-three-sizes-that-day)
+* [Day 17: Log analysis - He analyzed and analyzed till his analyzer was sore!](#day-17-log-analysis---he-analyzed-and-analyzed-till-his-analyzer-was-sore)
 
 ## Day 1: OPSEC - Maybe SOC-mas music, he thought, doesn't come from a store?
 
@@ -709,3 +710,19 @@ $secret_name = echo $secret | jq -r .name
 $secret_value = az keyvault secret show --vault-name warevillesecrets --name $secret_name
 echo $secret_value | jq -r .value
 ```
+
+## Day 17: Log analysis - He analyzed and analyzed till his analyzer was sore!
+
+Follow all the steps and create the "Field extractions"
+
+**Extract all the events from the cctv_feed logs. How many logs were captured associated with the successful login?**
+
+* Search `index=cctv_feed Event="Login successful"` and "All time"
+
+**What is the Session_id associated with the attacker who deleted the recording?**
+
+* Search `index=cctv_feed *Delete* | table Session_id | uniq`
+
+**What is the name of the attacker found in the logs, who deleted the CCTV footage?**
+
+* Search `index=cctv_feed *lsr1743nkskt3r722momvhjcs3* | table UserName | uniq`
