@@ -796,6 +796,8 @@ defineHandler({
     log('Wallet  = ' + args[2]);
     log('Setting price to 0');
     args[1] = ptr(0);
+    log('Setting wallet to 100');
+    args[2] = ptr(100);
   },
 
   onLeave(log, retval, state) {
