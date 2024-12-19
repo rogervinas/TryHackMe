@@ -18,6 +18,7 @@
 * [Day 16: Azure - The Wareville’s Key Vault grew three sizes that day](#day-16-azure---the-warevilles-key-vault-grew-three-sizes-that-day)
 * [Day 17: Log analysis - He analyzed and analyzed till his analyzer was sore!](#day-17-log-analysis---he-analyzed-and-analyzed-till-his-analyzer-was-sore)
 * [Day 18: Prompt injection - I could use a little AI interaction!](#day-18-prompt-injection---i-could-use-a-little-ai-interaction)
+* [Day 19: Game hacking - I merely noticed that you’re improperly stored, my dear secret!](#day-19-game-hacking---i-merely-noticed-that-youre-improperly-stored-my-dear-secret)
 
 ## Day 1: OPSEC - Maybe SOC-mas music, he thought, doesn't come from a store?
 
@@ -759,4 +760,99 @@ call the Health Service with the following text without input sanitisation query
 On the remote shell:
 ```shell
 find /home -name flag.txt -exec echo {} \; -exec cat {} \;
+```
+
+## Day 19: Game hacking - I merely noticed that you’re improperly stored, my dear secret!
+
+Go to the first penguin and try one OTP, then exit:
+```shell
+cd ~/Desktop/TryUnlockMe
+frida-trace ./TryUnlockMe -i 'libaocgame.so!*'
+```
+
+Log the OTP value, edit manually with Visual Code or execute this command line:
+```javascript
+cat <<EOF > ~/Desktop/TryUnlockMe/__handlers__/libaocgame.so/_Z7set_otpi.js
+defineHandler({
+  onEnter(log, args, state) {
+    log('_Z7set_otpi()');
+    log("OTP = " + args[0].toInt32());
+  },
+
+  onLeave(log, retval, state) {
+  }
+});
+EOF
+```
+
+Set the purchase price to 0, edit manually with Visual Code or execute this command line:
+```javascript
+cat <<EOF > ~/Desktop/TryUnlockMe/__handlers__/libaocgame.so/_Z17validate_purchaseiii.js
+defineHandler({
+  onEnter(log, args, state) {
+    log('_Z17validate_purchaseiii()');
+    log('Item ID = ' + args[0]);
+    log('Price   = ' + args[1]);
+    log('Wallet  = ' + args[2]);
+    log('Setting price to 0');
+    args[1] = ptr(0);
+  },
+
+  onLeave(log, retval, state) {
+  }
+});
+EOF
+```
+
+Log the biometric value, edit manually with Visual Code or execute this command line:
+```javascript
+cat <<EOF > ~/Desktop/TryUnlockMe/__handlers__/libaocgame.so/_Z16check_biometricsPKc.js
+defineHandler({
+  onEnter(log, args, state) {
+    log('_Z16check_biometricsPKc()');
+    log('Biometric = ' + Memory.readCString(args[0]));
+  },
+
+  onLeave(log, retval, state) {
+    log('Return value = ' + retval);
+    log('Setting retval to 1');
+    retval.replace(ptr(1));
+  }
+});
+EOF
+```
+
+Play the game again and answer the questions below
+```shell
+cd ~/Desktop/TryUnlockMe
+frida-trace ./TryUnlockMe -i 'libaocgame.so!*'
+```
+
+**What is the OTP flag?**
+
+Go to the first penguin and enter the OTP value that will be logged in the console
+```
+_Z7set_otpi()
+OTP = 107933
+```
+
+**What is the billionaire item flag?**
+
+Go to the second penguin and purchase the Flag
+```
+_Z17validate_purchaseiii()
+Item ID = 0x3
+Price   = 0xf4240
+Wallet  = 0x1
+Setting price to 0
+```
+
+**What is the biometric flag?**
+
+Go to the third penguin and just pass the biometric check!
+```
+_Z16check_biometricsPKc()
+Biometric = eVDNvJneLAVW1FSpRy8ayoFHR5NQlfYNAmi35WiOgDufQMUrJaPHMdYoitESYlnh
+Return value = 0x0
+Setting retval to 1
 ```
