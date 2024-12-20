@@ -19,6 +19,7 @@
 * [Day 17: Log analysis - He analyzed and analyzed till his analyzer was sore!](#day-17-log-analysis---he-analyzed-and-analyzed-till-his-analyzer-was-sore)
 * [Day 18: Prompt injection - I could use a little AI interaction!](#day-18-prompt-injection---i-could-use-a-little-ai-interaction)
 * [Day 19: Game hacking - I merely noticed that you’re improperly stored, my dear secret!](#day-19-game-hacking---i-merely-noticed-that-youre-improperly-stored-my-dear-secret)
+* [Day 20: Traffic analysis - If you utter so much as one packet…](#day-20-traffic-analysis---if-you-utter-so-much-as-one-packet)
 
 ## Day 1: OPSEC - Maybe SOC-mas music, he thought, doesn't come from a store?
 
@@ -858,3 +859,47 @@ Biometric = eVDNvJneLAVW1FSpRy8ayoFHR5NQlfYNAmi35WiOgDufQMUrJaPHMdYoitESYlnh
 Return value = 0x0
 Setting retval to 1
 ```
+
+## Day 20: Traffic analysis - If you utter so much as one packet…
+
+**What was the first message the payload sent to Mayor Malware’s C2?**
+
+Check the payload of this request:
+```
+ip.src == 10.10.229.217 && http.request.method == "POST" && http.request.uri == "/initial"
+```
+
+**What was the IP address of the C2 server?**
+
+Check destination IP of any of these requests:
+```
+ip.src == 10.10.229.217 && http
+```
+
+**What was the command sent by the C2 server to the target machine?**
+
+Check the response of this HTTP stream:
+```
+tcp.stream eq 2 && http
+```
+
+**What was the filename of the critical file exfiltrated by the C2 server?**
+
+Check the filename on the multipart payload of this request:
+```
+ip.src == 10.10.229.217 && http.request.method == "POST" && http.request.uri == "/exfiltrate"
+```
+
+**What secret message was sent back to the C2 in an encrypted format through beacons?**
+
+Get the content on the multipart payload of this request:
+```
+ip.src == 10.10.229.217 && http.request.method == "POST" && http.request.uri == "/exfiltrate"
+```
+
+Check the payload of any of these requests:
+```
+ip.src == 10.10.229.217 && http.request.method == "POST" && http.request.uri == "/beacon"
+```
+
+With those two you can create this [Cyberchef recipe](https://gchq.github.io/CyberChef/#recipe=AES_Decrypt(%7B'option':'Hex','string':'1234567890abcdef1234567890abcdef'%7D,%7B'option':'Hex','string':''%7D,'ECB','Hex','Raw',%7B'option':'Hex','string':''%7D,%7B'option':'Hex','string':''%7D)&input=ODcyNDY3MGMyNzFhZGZmZDU5NDQ3NTUyYTBlZjMyNDk)
