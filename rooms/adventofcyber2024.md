@@ -902,4 +902,4 @@ Check the payload of any of these requests:
 ip.src == 10.10.229.217 && http.request.method == "POST" && http.request.uri == "/beacon"
 ```
 
-With those two you can create this [Cyberchef recipe](https://gchq.github.io/CyberChef/#recipe=AES_Decrypt(%7B'option':'Hex','string':'1234567890abcdef1234567890abcdef'%7D,%7B'option':'Hex','string':''%7D,'ECB','Hex','Raw',%7B'option':'Hex','string':''%7D,%7B'option':'Hex','string':''%7D)&input=ODcyNDY3MGMyNzFhZGZmZDU5NDQ3NTUyYTBlZjMyNDk)
+With those two you can create this [CyberChef recipe](https://gchq.github.io/CyberChef/#recipe=AES_Decrypt(%7B'option':'Hex','string':'1234567890abcdef1234567890abcdef'%7D,%7B'option':'Hex','string':''%7D,'ECB','Hex','Raw',%7B'option':'Hex','string':''%7D,%7B'option':'Hex','string':''%7D)&input=ODcyNDY3MGMyNzFhZGZmZDU5NDQ3NTUyYTBlZjMyNDk)
