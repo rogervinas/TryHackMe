@@ -20,6 +20,7 @@
 * [Day 18: Prompt injection - I could use a little AI interaction!](#day-18-prompt-injection---i-could-use-a-little-ai-interaction)
 * [Day 19: Game hacking - I merely noticed that you’re improperly stored, my dear secret!](#day-19-game-hacking---i-merely-noticed-that-youre-improperly-stored-my-dear-secret)
 * [Day 20: Traffic analysis - If you utter so much as one packet…](#day-20-traffic-analysis---if-you-utter-so-much-as-one-packet)
+* [Day 21: Reverse engineering - HELP ME...I'm REVERSE ENGINEERING!](#day-21-reverse-engineering---help-meim-reverse-engineering)
 
 ## Day 1: OPSEC - Maybe SOC-mas music, he thought, doesn't come from a store?
 
@@ -903,3 +904,34 @@ ip.src == 10.10.229.217 && http.request.method == "POST" && http.request.uri == 
 ```
 
 With those two you can create this [CyberChef recipe](https://gchq.github.io/CyberChef/#recipe=AES_Decrypt(%7B'option':'Hex','string':'1234567890abcdef1234567890abcdef'%7D,%7B'option':'Hex','string':''%7D,'ECB','Hex','Raw',%7B'option':'Hex','string':''%7D,%7B'option':'Hex','string':''%7D)&input=ODcyNDY3MGMyNzFhZGZmZDU5NDQ3NTUyYTBlZjMyNDk)
+
+## Day 21: Reverse engineering - HELP ME...I'm REVERSE ENGINEERING!
+
+**What is the function name that downloads and executes files in the WarevilleApp.exe?**
+
+Open `C:\Users\Administrator\Desktop\WarevilleApp.exe` with **ILSpy** and check functions of FancyApp > Form1
+
+**Once you execute the WarevilleApp.exe, it downloads another binary to the Downloads folder. What is the name of the binary?**
+
+Decompile the function and search for:
+```c
+string text = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads"), "xxxxxxxx.exe");
+```
+
+**What domain name is the one from where the file is downloaded after running WarevilleApp.exe?**
+
+Decompile the function and search for:
+```c
+string address = "http://xxxxxxx.xxx:8080/dw/xxxxxxxx.exe";
+```
+
+**The stage 2 binary is executed automatically and creates a zip file compromising the victim's computer data; what is the name of the zip file?**
+
+Execute `C:\Users\Administrator\Desktop\WarevilleApp.exe` and find the generated zip file in `C:\Users\Administrator\Pictures` 
+
+**What is the name of the C2 server where the stage 2 binary tries to upload files?**
+
+Open `C:\Users\Administrator\Downloads\explorer.exe` with **ILSpy** and check functions of FileCollector > Program
+```c
+string address = "http://xxxxxxxxxxx.xxx/upload";
+```
