@@ -21,6 +21,7 @@
 * [Day 19: Game hacking - I merely noticed that you’re improperly stored, my dear secret!](#day-19-game-hacking---i-merely-noticed-that-youre-improperly-stored-my-dear-secret)
 * [Day 20: Traffic analysis - If you utter so much as one packet…](#day-20-traffic-analysis---if-you-utter-so-much-as-one-packet)
 * [Day 21: Reverse engineering - HELP ME...I'm REVERSE ENGINEERING!](#day-21-reverse-engineering---help-meim-reverse-engineering)
+* [Day 22: Kubernetes DFIR - It's because I'm kubed, isn't it?](#day-22-kubernetes-dfir---its-because-im-kubed-isnt-it)
 
 ## Day 1: OPSEC - Maybe SOC-mas music, he thought, doesn't come from a store?
 
@@ -934,4 +935,61 @@ Execute `C:\Users\Administrator\Desktop\WarevilleApp.exe` and find the generated
 Open `C:\Users\Administrator\Downloads\explorer.exe` with **ILSpy** and check functions of FileCollector > Program
 ```c
 string address = "http://xxxxxxxxxxx.xxx/upload";
+```
+
+## Day 22: Kubernetes DFIR - It's because I'm kubed, isn't it?
+
+```shell
+minikube start
+```
+
+**What is the name of the webshell that was used by Mayor Malware?**
+
+Directly from the pod:
+```shell
+kubectl exec -n wareville naughty-or-nice -it -- grep "/\S*.php?cmd=\S*" /var/log/apache2/access.log
+```
+
+Or from the backup log:
+```shell
+grep "/\S*.php?cmd=\S*" ~/dfir_artefacts/pod_apache2_access.log
+```
+
+**What file did Mayor Malware read from the pod?**
+
+```shell
+grep "/\S*.php?cmd=cat\S*" ~/dfir_artefacts/pod_apache2_access.log
+```
+
+**What tool did Mayor Malware search for that could be used to create a remote connection from the pod?**
+
+```shell
+grep "/\S*.php?cmd=which\S*" ~/dfir_artefacts/pod_apache2_access.log
+```
+
+**What IP connected to the docker registry that was unexpected?**
+
+The one that is not `172.17.0.1`:
+```shell
+cat ~/dfir_artefacts/docker-registry-logs.log | grep "HEAD" | cut -d ' ' -f 1 | sort -u
+```
+
+**At what time is the first connection made from this IP to the docker registry?**
+
+Replace `x.x.x.x` by the IP of previous answer:
+```shell
+cat ~/dfir_artefacts/docker-registry-logs.log | grep x.x.x.x | head -1
+```
+
+**At what time is the updated malicious image pushed to the registry?**
+
+Replace `x.x.x.x` by the IP of previous answer:
+```shell
+cat ~/dfir_artefacts/docker-registry-logs.log | grep x.x.x.x | grep "PATCH" | head -1
+```
+
+**What is the value stored in the "pull-creds" secret?**
+
+```shell
+kubectl get secret pull-creds -n wareville -o jsonpath='{.data.\.dockerconfigjson}' | base64 --decode
 ```
