@@ -1014,7 +1014,7 @@ john --format=raw-sha256 --show hash1.txt
 
 **What is the flag at the top of the private.pdf file?**
 
-Get the pdf password:
+Get `private.pdf` password:
 ```shell
 pdf2john.pl private.pdf > pdf.hash
 john --rules=single --wordlist=wordlist.txt pdf.hash
