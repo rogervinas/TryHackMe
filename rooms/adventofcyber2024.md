@@ -22,6 +22,7 @@
 * [Day 20: Traffic analysis - If you utter so much as one packet…](#day-20-traffic-analysis---if-you-utter-so-much-as-one-packet)
 * [Day 21: Reverse engineering - HELP ME...I'm REVERSE ENGINEERING!](#day-21-reverse-engineering---help-meim-reverse-engineering)
 * [Day 22: Kubernetes DFIR - It's because I'm kubed, isn't it?](#day-22-kubernetes-dfir---its-because-im-kubed-isnt-it)
+* [Day 23: Hash cracking - You wanna know what happens to your hashes?](#day-23-hash-cracking---you-wanna-know-what-happens-to-your-hashes)
 
 ## Day 1: OPSEC - Maybe SOC-mas music, he thought, doesn't come from a store?
 
@@ -992,4 +993,39 @@ cat ~/dfir_artefacts/docker-registry-logs.log | grep x.x.x.x | grep "PATCH" | he
 
 ```shell
 kubectl get secret pull-creds -n wareville -o jsonpath='{.data.\.dockerconfigjson}' | base64 --decode
+```
+
+## Day 23: Hash cracking - You wanna know what happens to your hashes?
+
+```shell
+cd ~/AOC2024
+```
+
+**Crack the hash value stored in hash1.txt. What was the password?**
+
+```shell
+john --format=raw-sha256 --rules=wordlist --wordlist=/usr/share/wordlists/rockyou.txt hash1.txt
+```
+
+If you have executed it already you can just show the cracked password:
+```shell
+john --format=raw-sha256 --show hash1.txt
+```
+
+**What is the flag at the top of the private.pdf file?**
+
+Get the pdf password:
+```shell
+pdf2john.pl private.pdf > pdf.hash
+john --rules=single --wordlist=wordlist.txt pdf.hash
+```
+
+If you have executed it already you can just show the cracked password:
+```shell
+john --show pdf.hash
+```
+
+Open `private.pdf` or use this command line, replacing `xxxx` by the cracked password:
+```shell
+pdftotext -opw xxxx private.pdf /dev/stdout | head -10
 ```
