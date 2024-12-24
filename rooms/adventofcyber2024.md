@@ -23,6 +23,7 @@
 * [Day 21: Reverse engineering - HELP ME...I'm REVERSE ENGINEERING!](#day-21-reverse-engineering---help-meim-reverse-engineering)
 * [Day 22: Kubernetes DFIR - It's because I'm kubed, isn't it?](#day-22-kubernetes-dfir---its-because-im-kubed-isnt-it)
 * [Day 23: Hash cracking - You wanna know what happens to your hashes?](#day-23-hash-cracking---you-wanna-know-what-happens-to-your-hashes)
+* [Day 24: Communication protocols - You can’t hurt SOC-mas, Mayor Malware!](#day-24-communication-protocols---you-cant-hurt-soc-mas-mayor-malware)
 
 ## Day 1: OPSEC - Maybe SOC-mas music, he thought, doesn't come from a store?
 
@@ -1028,4 +1029,23 @@ john --show pdf.hash
 Open `private.pdf` or use this command line, replacing `xxxx` by the cracked password:
 ```shell
 pdftotext -opw xxxx private.pdf /dev/stdout | head -10
+```
+
+# Day 24: Communication protocols - You can’t hurt SOC-mas, Mayor Malware!
+
+**What is the flag?**
+
+* Open `~/Desktop/MQTTSIM/challenge/challenge.pcapng` with Wireshark
+* Filter by `mqtt.msgtype == 3` (MQTT Publish Message)
+* You'll find these messages:
+  * Topic d2FyZXZpbGxl/Y2hyaXN0bWFzbGlnaHRz = wareville/christmaslights in Base64
+    * Payload 6f6e = on
+    * Payload 6f6666 = off
+  * Topic d2FyZXZpbGxl/Y2hyaXN0bWFzbGlnaHRz/b25fdGltZQ== = wareville/christmaslights/on_time
+    * Payload 31333a3230 = 13:20
+    * Payload 32323a3030 = 22:00
+
+Then to turn lights on we should send:
+```shell
+mosquitto_pub -h localhost -t d2FyZXZpbGxl/Y2hyaXN0bWFzbGlnaHRz -m on
 ```
