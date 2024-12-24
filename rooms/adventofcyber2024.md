@@ -1038,12 +1038,12 @@ pdftotext -opw xxxx private.pdf /dev/stdout | head -10
 * Open `~/Desktop/MQTTSIM/challenge/challenge.pcapng` with Wireshark
 * Filter by `mqtt.msgtype == 3` (MQTT Publish Message)
 * You'll find these messages:
-  * Topic d2FyZXZpbGxl/Y2hyaXN0bWFzbGlnaHRz = wareville/christmaslights in Base64
-    * Payload 6f6e = on
-    * Payload 6f6666 = off
-  * Topic d2FyZXZpbGxl/Y2hyaXN0bWFzbGlnaHRz/b25fdGltZQ== = wareville/christmaslights/on_time
-    * Payload 31333a3230 = 13:20
-    * Payload 32323a3030 = 22:00
+  * Topic `d2FyZXZpbGxl/Y2hyaXN0bWFzbGlnaHRz` = `wareville/christmaslights` in Base64
+    * Payload `6f6e` = `on` in hex
+    * Payload `6f6666` = `off` in hex
+  * Topic `d2FyZXZpbGxl/Y2hyaXN0bWFzbGlnaHRz/b25fdGltZQ==` = `wareville/christmaslights/on_time`
+    * Payload `31333a3230` = `13:20` in hex
+    * Payload `32323a3030` = `22:00` in hex
 
 Then to turn lights on we should send:
 ```shell
