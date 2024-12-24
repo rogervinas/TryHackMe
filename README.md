@@ -2,6 +2,7 @@
 
 [![My Profile](https://tryhackme-badges.s3.amazonaws.com/roger.vinas.png)](https://tryhackme.com/p/roger.vinas)
 
+- 🎄 [Advent of Cyber 2024](rooms/adventofcyber2024.md)
 - Cyber Defense
   - Threat Emulation
     - [Attacktive Directory](rooms/attacktivedirectory.md)
