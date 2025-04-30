@@ -10,9 +10,6 @@
 ```shell
 sudo echo x.x.x.x gitlab.tryhackme.loc >> /etc/hosts
 sudo echo x.x.x.x jenkins.tryhackme.loc >> /etc/hosts
-
-sudo echo 10.200.6.150 gitlab.tryhackme.loc >> /etc/hosts
-sudo echo 10.200.6.160 jenkins.tryhackme.loc >> /etc/hosts
 ```
 * Create `shell.sh` (replacing `ATTACKER_IP`):
 ```shell
