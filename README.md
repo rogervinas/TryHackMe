@@ -57,3 +57,6 @@
     - [Traverse](rooms/traverse.md)
   - Managing Incidents
     - [Logging for Accountability](rooms/loggingforaccountability.md)
+- DevSecOps
+  - Security of the Pipeline
+    - [CI/CD and Build Security](rooms/cicdandbuildsecurity.md)
