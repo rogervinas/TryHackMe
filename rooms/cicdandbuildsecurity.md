@@ -45,7 +45,7 @@ pipeline {
 ```
 * Commit changes
 * Create merge request from your branch into ash/Merge-Test main branch
-* You can go to http://jenkins.tryhackme.loc:8080/job/Test%20Pipe/job/Test%20-%20Full%20Pipe/ to see the job execution (user `jenkins` and password `jenkins`)
+* You can go to http://jenkins.tryhackme.loc:8080 to see the job execution (user `jenkins` and password `jenkins`)
 * You can repeat the steps just creating a new branch and starting over
 
 Once you have the reverse shell you can continue to next section.
