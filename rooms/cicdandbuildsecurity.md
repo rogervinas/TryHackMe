@@ -122,7 +122,7 @@ Ready to verify? [Y/X/Z]:
 echo xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > /flag/myuser.txt
 ```
 * Back to **mother** proceed with the verification:
-```text
+```shell
 Ready to verify? [Y/X/Z]: Y
 
 Congratulations! You have received the flag for: Build Process Compromise
@@ -196,7 +196,7 @@ meterpreter > edit /flag/myuser.txt
 (paste xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
 ```
 * Back to **mother** proceed with the verification:
-```text
+```shell
 Ready to verify? [Y/X/Z]: Y
 
 Congratulations! You have received the flag for: Build Server Compromise
