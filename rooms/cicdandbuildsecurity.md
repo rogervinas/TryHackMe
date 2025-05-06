@@ -476,7 +476,7 @@ Your flag value is: THM{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}
 * Log in as `anatacker` (password `Password1@`)
 * Go to http://gitlab.tryhackme.loc/ash/environments
 * Change to **dev** branch
-* Edit `.gitlab-ci.yml` (replacing `ATTACKER_IP`):
+* Edit `.gitlab-ci.yml`:
 ```yaml
 stages:
   - deploy
