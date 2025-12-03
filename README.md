@@ -63,3 +63,4 @@
   - Infrastructure as Code
     - [On-Premises IaC](rooms/onpremisesiac.md)
 - [HealthGPT](rooms/healthgpt.md)
+- [BankGPT](rooms/bankgpt.md)
