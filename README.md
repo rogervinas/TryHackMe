@@ -29,6 +29,9 @@
   - [Boogeyman 1](rooms/boogeyman1.md)
   - [Boogeyman 2](rooms/boogeyman2.md)
   - [Boogeyman 3](rooms/boogeyman3.md)
+- [SOC Level 2](https://tryhackme.com/r/path/outline/soclevel2)
+  - [Advanced Splunk](https://tryhackme.com/module/advanced-splunk)
+    - [Fixit](rooms/fixit.md)
 - Web Fundamentals
   - Web Hacking Fundamentals
     - [OWASP Top 10 - 2021](rooms/owasptop102021.md)
