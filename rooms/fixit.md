@@ -41,11 +41,11 @@ Check if the logs are correct `index=main` (select 5-minute window to see the la
 
 ## Answers
 
-### What is the full path of the FIXIT app directory?
+### What is the full path of the FIXIT app directory?
 
 `/opt/splunk/etc/apps/fixit`
 
-### What Stanza will we use to define Event Boundary in this multi-line Event case?
+### What Stanza will we use to define Event Boundary in this multi-line Event case?
 
 `BREAK_ONLY_BEFORE`
 
@@ -56,25 +56,25 @@ cat /opt/splunk/etc/apps/fixit/default/inputs.conf
 
 `/opt/splunk/etc/apps/fixit/bin/network-logs`
 
-### What regex pattern will help us define the Event's start?
+### What regex pattern will help us define the Event's start?
 
 `\[Network-log\]`
 
-### What is the captured domain?
+### What is the captured domain?
 
 Click on `Domain` and see the only value:
 
 `Cybertees.THM`
 
-### How many countries are captured in the logs?
+### How many countries are captured in the logs?
 
 Check the count for `Country`: 12
 
-### How many departments are captured in the logs?
+### How many departments are captured in the logs?
 
 Check the count for `Department`: 6
 
-### How many usernames are captured in the logs?
+### How many usernames are captured in the logs?
 
 Check the count for `Username`: 28
 
@@ -86,7 +86,7 @@ Check the count for `Source_IP`: 52
 
 `inputs.conf, props.conf, transforms.conf`
 
-### What are the TOP two countries the user Robert tried to access the domain from? [Answer in comma-separated and in Alphabetic Order][Format: Country1, Country2]
+### What are the TOP two countries the user Robert tried to access the domain from? [Answer in comma-separated and in Alphabetic Order][Format: Country1, Country2]
 
 Use this query:
 ```text
