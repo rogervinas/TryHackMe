@@ -44,7 +44,7 @@ Check if the logs are correct `index=main` (select 5-minute window to see the la
 ### What is the full path of the FIXIT app directory?
 
 ```
-/opt/splunk/etc/apps/fixit`
+/opt/splunk/etc/apps/fixit
 ```
 
 ### What Stanza will we use to define Event Boundary in this multi-line Event case?
