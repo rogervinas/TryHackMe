@@ -32,6 +32,8 @@
 - [SOC Level 2](https://tryhackme.com/r/path/outline/soclevel2)
   - [Advanced Splunk](https://tryhackme.com/module/advanced-splunk)
     - [Fixit](rooms/fixit.md)
+  - [Advanced ELK](https://tryhackme.com/module/advanced-elk)
+    - [Slingshot](rooms/slingshot.md)
 - Web Fundamentals
   - Web Hacking Fundamentals
     - [OWASP Top 10 - 2021](rooms/owasptop102021.md)
