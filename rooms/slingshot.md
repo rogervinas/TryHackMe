@@ -2,6 +2,9 @@
 
 ## Task 2: The Slingshot Investigation
 
+1. Ensure you're using the `apache_logs` Data view
+2. Set the time frame from `Jul 26, 2023 @ 00:00:00.000 → now`
+
 ### What is the attacker's IP address?
 
 apache_logs > Break down by `transaction.remote_address`
@@ -26,35 +29,35 @@ transaction.remote_address: 10.0.2.15
 
 apache_logs > Filter by:
 ```
-transaction.remote_address: 10.0.2.15 AND request.headers.User-Agent: "Mozilla/5.0 (Gobuster)" AND message: 404
+transaction.remote_address: 10.0.2.15 AND response.status: 404
 ```
 
 ### What flag was discovered in one of the directories identified during enumeration?
 
 apache_logs > Filter by:
 ```
-transaction.remote_address: 10.0.2.15 AND request.headers.User-Agent: "Mozilla/5.0 (Gobuster)" AND NOT message: 404 AND message: flag
+transaction.remote_address: 10.0.2.15 AND request.headers.User-Agent: "Mozilla/5.0 (Gobuster)" AND NOT response.status: 404 AND message: flag
 ```
 
 ### What login page did the attacker discover using the directory enumeration tool?
 
 apache_logs > Filter by:
 ```
-transaction.remote_address: 10.0.2.15 AND request.headers.User-Agent: "Mozilla/5.0 (Gobuster)" AND NOT message: 404 AND message: login
+transaction.remote_address: 10.0.2.15 AND request.headers.User-Agent: "Mozilla/5.0 (Gobuster)" AND NOT response.status: 404 AND message: login
 ```
 
 ### What is the User-Agent of the brute-force tool that the attacker used on the admin panel?
 
 apache_logs > Filter by:
 ```
-transaction.remote_address: 10.0.2.15 AND message: admin-login.php
+transaction.remote_address: 10.0.2.15 AND http.url: /admin-login.php AND response.status: 401
 ```
 
 ### What username:password combination did the attacker use to gain access to the admin page?
 
 apache_logs > Filter by:
 ```
-transaction.remote_address: 10.0.2.15 AND message: admin-login.php AND NOT message: 401
+transaction.remote_address: 10.0.2.15 AND http.url: /admin-login.php AND NOT response.status: 401
 ```
 
 Find the `Authorization":"Basic xxxx"` header and Base64 decode it:
@@ -66,14 +69,14 @@ echo xxxx | base64 -d
 
 apache_logs > Filter by:
 ```
-transaction.remote_address: 10.0.2.15 AND message: "*/admin/upload.php*"
+transaction.remote_address: 10.0.2.15 AND http.url: /admin/upload.php* AND http.method: POST
 ```
 
 ### What was the first command the attacker ran using the web shell?
 
 apache_logs > Filter by:
 ```
-transaction.remote_address: 10.0.2.15 AND message: "GET /uploads/easy-simple-php-webshell.php?cmd="
+transaction.remote_address: 10.0.2.15 AND http.url: /uploads/easy-simple-php-webshell.php?cmd=* AND http.method: GET
 ```
 
 Check the value of the `cmd` query parameter.
@@ -89,14 +92,14 @@ transaction.remote_address: 10.0.2.15 AND message: config-db.php
 
 apache_logs > Filter by:
 ```
-transaction.remote_address: 10.0.2.15 AND message: /phpmyadmin AND message: db=
+transaction.remote_address: 10.0.2.15 AND http.url: /phpmyadmin/* AND message: db=
 ```
 
 ### What flag does the attacker insert into the database using import.php?
 
 apache_logs > Filter by:
 ```
-transaction.remote_address: 10.0.2.15 AND message: import.php
+transaction.remote_address: 10.0.2.15 AND http.url: /import.php
 ```
 
 Check the INSERT statement.
