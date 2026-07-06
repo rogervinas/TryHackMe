@@ -34,6 +34,7 @@
     - [Fixit](rooms/fixit.md)
   - [Advanced ELK](https://tryhackme.com/module/advanced-elk)
     - [Slingshot](rooms/slingshot.md)
+  - [HeartBleed](rooms/heartbleed.md)
 - Web Fundamentals
   - Web Hacking Fundamentals
     - [OWASP Top 10 - 2021](rooms/owasptop102021.md)
